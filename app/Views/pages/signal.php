@@ -1,7 +1,7 @@
 <?= $this->extend("App\Views\home") ?>
 <?= $this->section('main') ?>
     <?= $this->section('javascript') ?>
-       
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4099957745291159" crossorigin="anonymous"></script>
     <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
       var socket = io("ws://35.184.95.244:7000", {
@@ -39,7 +39,12 @@
 
 
       });
-      
+    (function(){
+        setInterval(function(){
+            var html =`<ins class="adsbygoogle" style="display:inline-block;width:100%;height:250px" data-ad-client="ca-pub-4099957745291159" data-ad-slot="1384479382"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>`;
+          $(".adsbygoogle").html(html);
+        },600000);
+    })();
     </script>
 
     
@@ -161,7 +166,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Open</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stoploss</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Take Profit</th>
-                      <th class="text-secondary opacity-7">Open Time</th>
+                      <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -180,7 +185,7 @@
                       <td><?php echo $item->open;?></td>
                       <td><?php echo $item->sl;?></td>
                       <td><?php echo $item->tp;?></td>
-                      <td><?php echo date("d-m h:i A",$item->opentime);?></td>
+                      <td class="text-right"><button class="btn btn-icon-only btn-rounded btn-outline-primary mb-0 me-3 btn-sm  align-items-center justify-content-center"><i class="fas fa-arrow-right"></i></button></td>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -190,18 +195,10 @@
           </div>
         </div>
         <div class="col-md-5 mt-4">
-          <div class="card mb-4">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4099957745291159"
-               crossorigin="anonymous"></script>
-          <!-- 300x250px -->
-          <ins class="adsbygoogle"
-               style="display:inline-block;width:100%;height:250px"
-               data-ad-client="ca-pub-4099957745291159"
-               data-ad-slot="1384479382"></ins>
-          <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-          </script>
-        </div>
+          <div class="card mb-4 adsbygoogle">
+            
+          
+          </div>
           <div class="card h-100 mb-4">
             <div class="card-header pb-0 px-3">
               <div class="row">
@@ -210,7 +207,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small>23 - 30 March 2020</small>
+                  <small><?php echo date('m-d-y h:i:s A');?></small>
                 </div>
               </div>
             </div>
@@ -222,12 +219,12 @@
                   <div class="d-flex align-items-center">
                     <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo $item->type;?> [Open : <?php echo $item->open;?> - Sl : <?php echo $item->sl;?> - TP : <?php echo $item->tp;?>]</h6>
+                      <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo $item->type;?> [Open : <?php echo $item->open;?> - Sl : <?php echo $item->sl;?> - Close : <?php echo $item->close_at;?>]</h6>
                       <span class="text-xs"><?php echo date("d-m h:i A",$item->opentime);?> - <?php echo date("d-m h:i A",$item->close_time);?></span>
                     </div>
                   </div>
                   <div class="d-flex align-items-center text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : $item->profit_pip < 0 ? "danger text-gradient " : "secondary";?> text-sm font-weight-bold">
-                    <?php echo $item->profit_pip > 0 ? "+" : $item->profit_pip < 0 ? "-" : ":";?> <?php echo $item->profit_pip;?> pip(s)
+                    <?php echo $item->profit_pip > 0 ? "+" : $item->profit_pip < 0 ? "" : ":";?> <?php echo $item->profit_pip;?> pip(s)
                   </div>
                 </li>
                 <?php } ?>
