@@ -49,7 +49,7 @@ class Signal extends BaseController
 			$this->query->createOrder($arv);
 			$client = \Config\Services::curlrequest();
 
-			$client->request('post', 'http://127.0.0.1:7000/signal', ["json" => $arv]);
+			$client->request('post', 'http://localhost:7000/signal', ["json" => $arv]);
 			echo json_encode(["status" => "ok"]);
 		}
 
