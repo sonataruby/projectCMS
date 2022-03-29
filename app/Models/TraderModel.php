@@ -61,6 +61,7 @@ class TraderModel extends Model
 			];
 		
 		if($info) $this->db->table('trader_signal_finish')->insert($arv);
+		return $arv;
 	}
 }
 

@@ -1,7 +1,7 @@
 <?= $this->extend("App\Views\home") ?>
 <?= $this->section('main') ?>
     <?= $this->section('javascript') ?>
-    
+
     
     <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
@@ -40,6 +40,31 @@
 
 
       });
+    socket.on("signal finish", function (data) {
+        
+        var html = `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                  <div class="d-flex align-items-center">
+                    <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"}  mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-1 text-dark text-sm">${data.symbol} ${data.type} [Open : ${data.open} - Sl : ${data.sl} - Close : ${data.close_at}]</h6>
+                      <span class="text-xs">${moment().format('D MMM, YYYY')} - ${moment().format('D MMM, YYYY')}</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center text-${data.profit_pip > 0  ? "info text-gradient" : (data.profit_pip < 0 ? "danger text-gradient" : "secondary")} text-sm font-weight-bold">
+                    ${data.profit_pip > 0  ? "+" : (data.profit_pip < 0 ? "" : ":")} ${data.profit_pip} pip(s)
+                  </div>
+                </li>`;
+        if($("#orderComplete ul li").length > 0){
+            $("#orderComplete ul li:first").before(html);
+        }else{
+          $("#orderComplete ul").append(html);
+        }
+        const audio = new Audio("/assets/sound/qcodes_3.mp3" );
+        audio.play();
+
+
+      });
+
     (function(){
         setInterval(function(){
             var html =`<ins class="adsbygoogle" style="display:inline-block;width:100%;height:250px" data-ad-client="ca-pub-4099957745291159" data-ad-slot="1384479382"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>`;
@@ -214,7 +239,7 @@
             </div>
             <div class="card-body pt-4 p-3">
               
-              <ul class="list-group">
+              <ul class="list-group" id="orderComplete">
                 <?php foreach($finish as $item){ ?>
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
