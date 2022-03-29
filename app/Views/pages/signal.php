@@ -4,7 +4,7 @@
        
     <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
-      var socket = io("<?php echo base_url();?>", {
+      var socket = io("ws://35.184.95.244:7000", {
         withCredentials: false,
         extraHeaders: {
           "username": "<?php echo user_id();?>"
