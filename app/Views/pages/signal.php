@@ -1,7 +1,8 @@
 <?= $this->extend("App\Views\home") ?>
 <?= $this->section('main') ?>
     <?= $this->section('javascript') ?>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4099957745291159" crossorigin="anonymous"></script>
+    
+    
     <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
       var socket = io("ws://35.184.95.244:7000", {
