@@ -50,7 +50,8 @@
   }
   ?>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4099957745291159" crossorigin="anonymous"></script>
-<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/be3bc6006513d53e05e195918/3c505402484468830153a4748.js");</script>
+
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/be3bc6006513d53e05e195918/edc0c2d1c306b9ab9acf31a77.js");</script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
