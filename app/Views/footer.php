@@ -4,7 +4,7 @@
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                Copy @copy; <?php echo date('y') - 5;?>-<?php echo date('y');?> by SmartProject
+                Copy &copy; <?php echo date('y') - 5;?>-<?php echo date('y');?> by SmartProject
               </div>
             </div>
             <div class="col-lg-6">
