@@ -12,7 +12,7 @@ class Signal extends BaseController
         // check if already logged in.
 		if (!logged_in())
 		{
-			return redirect()->back();
+			return redirect("/login");
 		}
 		$search = $this->request->getGet('fillter');
 
