@@ -19,7 +19,7 @@ class TraderModel extends Model
 	}
 
 	public function getSignalFinish(){
-		$query = $this->db->table('trader_signal_finish')->get(15);
+		$query = $this->db->table('trader_signal_finish')->orderBy("id","DESC")->get(10);
 		return $query->getResult();
 
 	}
