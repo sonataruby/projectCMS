@@ -32,6 +32,7 @@ class TraderModel extends Model
 
 	public function finishOrder($obj){
 		$info = $this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->get(1);
+		if(!$info) return false;
 		$action = $obj->close_type;
 		if($action == "sl" || $obj->target > 2){
 			$this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->delete();//Remove Complete Order
@@ -51,7 +52,7 @@ class TraderModel extends Model
 				"message_id" => $info->message_id,
 				"is_access" => $obj->target < 2 ? "Free" : "Vip"
 			];
-		$this->db->table('trader_signal_finish')->insert($arv);
+		if($info) $this->db->table('trader_signal_finish')->insert($arv);
 	}
 }
 
