@@ -4,7 +4,7 @@
        
     <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
-      var socket = io("http://127.0.0.1:7000", {
+      var socket = io("<?php echo base_url();?>", {
         withCredentials: false,
         extraHeaders: {
           "username": "<?php echo user_id();?>"
