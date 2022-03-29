@@ -223,8 +223,8 @@
                       <span class="text-xs"><?php echo date("d-m h:i A",$item->opentime);?> - <?php echo date("d-m h:i A",$item->close_time);?></span>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : $item->profit_pip < 0 ? "danger text-gradient " : "secondary";?> text-sm font-weight-bold">
-                    <?php echo $item->profit_pip > 0 ? "+" : $item->profit_pip < 0 ? "" : ":";?> <?php echo $item->profit_pip;?> pip(s)
+                  <div class="d-flex align-items-center text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : ($item->profit_pip < 0 ? "danger text-gradient " : "secondary");?> text-sm font-weight-bold">
+                    <?php echo $item->profit_pip > 0 ? "+" : ($item->profit_pip < 0 ? "" : ":");?> <?php echo $item->profit_pip;?> pip(s)
                   </div>
                 </li>
                 <?php } ?>
@@ -236,5 +236,5 @@
       </div>
      
     </div>
-  
+
 <?= $this->endSection() ?>

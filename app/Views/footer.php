@@ -96,7 +96,7 @@
   </div>
   
 
-   
+  <script src="./assets/js/plugins/chartjs.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -106,9 +106,9 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/argon-dashboard.min.js?v=2.0.2"></script>
+  <script src="./assets/js/dashboard.js?v=2.0.2"></script>
 
   
 </body>
