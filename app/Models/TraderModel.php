@@ -29,9 +29,13 @@ class TraderModel extends Model
 		$this->db->table('trader_signal')->insert($obj);
 	}
 
+	public function test(){
+		$info = $this->db->table('trader_signal')->where(["message_id" => 1699])->get(1)->getResult()[0];
+		print_r($info);
+	}
 
 	public function finishOrder($obj){
-		$info = $this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->get(1);
+		$info = $this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->get(1)->getResult()[0];
 		if(!$info) return false;
 		$action = $obj->close_type;
 		if($action == "sl" || $obj->target > 2){

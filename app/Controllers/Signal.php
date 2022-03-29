@@ -24,7 +24,9 @@ class Signal extends BaseController
 	public function attemptProfile(){
 
 	}
-
+	public function test(){
+		print_r($this->query->test());
+	}
 	public function api($type=""){
 		$data  = json_decode($this->request->getGet('query'));
 		
