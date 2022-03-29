@@ -6,7 +6,7 @@
       var socket = io("ws://35.184.95.244:7000", {
         withCredentials: false,
         extraHeaders: {
-          "my-custom-header": "<?php echo user_id();?>"
+          "username": "<?php echo user_id();?>"
         }
       });
       
