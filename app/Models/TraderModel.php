@@ -52,7 +52,7 @@ class TraderModel extends Model
 				"opentime" => $info->opentime,
 				"sl" => $info->sl,
 				"close_at" => $obj->close,
-				"close_time" => date("m-d-Y h:i:s"),
+				"close_time" => date("Y-m-d h:i:s"),
 				"profit_pip" => $obj->pip,
 				"profit_usd" => $obj->usd,
 				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  strtoupper($obj->close_type) : "Close"),
