@@ -65,7 +65,7 @@ class Signal extends BaseController
 				"usd" => $data->usd,
 				"message_id" => $data->telegram
 			];
-			$this->query->finishOrder($arv);
+			$this->query->finishOrder((Object)$arv);
 			echo json_encode(["status" => "ok"]);
 		}
 	}
