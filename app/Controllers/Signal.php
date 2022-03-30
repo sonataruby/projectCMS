@@ -73,7 +73,8 @@ class Signal extends BaseController
 			@$client->request('post', 'http://localhost:7000/finish', ["json" => $arvObj]);
 			$msg = "";
 			
-			$reply_telegram_postid = $arvObj->message_id_group;
+			$readObj = (Object)$arvObj;
+			$reply_telegram_postid = $readObj->message_id_group;
 
 			if(strtolower($data->type) == "tp"){
 				if($data->target < 3){
