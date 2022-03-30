@@ -64,7 +64,8 @@ class Signal extends BaseController
 				"close" => $data->close_at,
 				"close_type" => strtolower($data->type),
 				"usd" => $data->usd,
-				"message_id" => $data->telegram
+				"message_id" => $data->telegram,
+				"finish" => $data->finish
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
 			$client->request('post', 'http://localhost:7000/finish', ["json" => $arvObj]);

@@ -57,7 +57,7 @@ class TraderModel extends Model
 
 		
 		$action = $obj->close_type;
-		if($action == "sl" || $obj->target > 2){
+		if($action == "sl" || $obj->target > 2 || $obj->finish == "yes"){
 			$this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->delete();//Remove Complete Order
 		}
 		$arv = [
