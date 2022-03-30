@@ -71,7 +71,7 @@ class TraderModel extends Model
 				"close_time" => date("Y-m-d h:i:s"),
 				"profit_pip" => $obj->pip,
 				"profit_usd" => $obj->usd,
-				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "Close"),
+				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "close"),
 				"message_id" => $info->message_id,
 				"is_access" => $obj->target < 2 ? "Free" : "Vip"
 			];
