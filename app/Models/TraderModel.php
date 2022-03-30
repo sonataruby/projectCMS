@@ -58,7 +58,7 @@ class TraderModel extends Model
 		
 		$action = $obj->close_type;
 		if($action == "sl" || $obj->target > 2 || $obj->finish == "yes"){
-			$this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->delete();//Remove Complete Order
+			$this->db->table('trader_signal')->delete(["message_id" => $obj->message_id]);//Remove Complete Order
 		}
 		$arv = [
 				"signals_id" => $info->id,
@@ -71,7 +71,7 @@ class TraderModel extends Model
 				"close_time" => date("Y-m-d h:i:s"),
 				"profit_pip" => $obj->pip,
 				"profit_usd" => $obj->usd,
-				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  strtoupper($obj->close_type) : "Close"),
+				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "Close"),
 				"message_id" => $info->message_id,
 				"is_access" => $obj->target < 2 ? "Free" : "Vip"
 			];
