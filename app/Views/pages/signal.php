@@ -267,7 +267,8 @@
                   <h6 class="mb-0">Real Signal Daily</h6>
                 </div>
                 <div class="col-6 text-end">
-                  <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Update VIP</a>
+                  
+                  <?php echo components("updateaccount",['text' => '<i class="fas fa-plus"></i>&nbsp;&nbsp;Update VIP', 'class' => 'btn bg-gradient-dark mb-0']);?>
                 </div>
               </div>
             </div>
