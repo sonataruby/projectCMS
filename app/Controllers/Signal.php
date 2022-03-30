@@ -17,8 +17,9 @@ class Signal extends BaseController
 		$search = $this->request->getGet('fillter');
 
         $data = $this->query->getSignal($search);
+        $dataWeek = $this->query->getSignalWeek($search);
         $finish = $this->query->getSignalFinish();
-		return view('pages/signal',["data" => $data, "finish" => $finish, "header" => ["title" => "Smart Signal"]]);
+		return view('pages/signal',["data" => $data, "week" => $dataWeek, "finish" => $finish, "header" => ["title" => "Smart Signal"]]);
 	}
 
 	public function attemptProfile(){

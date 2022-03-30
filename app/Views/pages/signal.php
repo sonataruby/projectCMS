@@ -2,9 +2,13 @@
 <?= $this->section('main') ?>
     <?= $this->section('javascript') ?>
 
-    
+    <script src="/assets/js/push/push.js?v=2.0.2"></script>
     <script src="/assets/js/socket.io.js?v=2.0.2"></script>
     <script type="text/javascript">
+
+
+
+      
       var socket = io("https://expressiq.co", {
         withCredentials: false,
         extraHeaders: {
@@ -35,9 +39,23 @@
         }else{
           $("#tablesignal tbody").append(html);
         }
+        if($("#tablesignal tbody tr").length > 5){
+          $("#tablesignal tbody tr:last").remove();
+        }
+
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
 
+        Push.create(data.symbol + ' Signal', {
+          body: data.type + ' '+data.symbol + ' '+data.open,
+          timeout: 4000,
+          onClick: function () {
+              console.log("Fired!");
+              window.focus();
+              this.close();
+          },
+          vibrate: [200, 100, 200, 100, 200, 100, 200]
+        });
 
       });
     socket.on("signal finish", function (data) {
@@ -59,10 +77,22 @@
         }else{
           $("#orderComplete ul").append(html);
         }
+        if($("#orderComplete ul li").length > 10){
+          $("#orderComplete ul li:last").remove();
+        }
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
 
-
+        Push.create(data.symbol + ' Signal', {
+          body: 'Close '+data.symbol + ' '+data.type+' at '+data.close_at,
+          timeout: 4000,
+          onClick: function () {
+              console.log("Fired!");
+              window.focus();
+              this.close();
+          },
+          vibrate: [200, 100, 200, 100, 200, 100, 200]
+        });
       });
 
     (function(){
@@ -179,9 +209,9 @@
       <div class="row">
         <div class="col-md-7 mt-4">
           
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-header pb-0 px-3">
-              <h6 class="mb-0">Real Signal</h6>
+              <h6 class="mb-0">Real Signal Daily</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
@@ -219,6 +249,30 @@
               </div>
             </div>
           </div>
+
+          <div class="card">
+              <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Real Signal Week</h6>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <?php foreach($week as $item){?>
+                    <div class="col-md-3">
+                        <img src="https://tinypng.com/images/social/website.jpg" class="card-img-top" alt="...">
+                        <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?></h6>
+                        <span class="text-xs"><?php echo $item->opentime;?></span>
+                        <div>
+                          Open : <?php echo $item->open;?><br>
+                          SL : <?php echo $item->sl;?><br>
+                          TP : <?php echo $item->tp;?>
+                        </div>
+                    </div>
+                  <?php } ?>
+                </div>
+              </div>
+          </div>
+
+
         </div>
         <div class="col-md-5 mt-4">
           <div class="card mb-4 adsbygoogle">

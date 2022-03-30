@@ -12,11 +12,27 @@ class TraderModel extends Model
 		if($s != ""){
 			$query->like("symbol",$s);
 		}
+		$query->whereIn("timefream",["M1","M5","M15"]);
+		
 		$query->orderBy("id","DESC");
 		$query = $query->get(10);
 		return $query->getResult();
 
 	}
+
+	public function getSignalWeek($s=""){
+		$query = $this->db->table('trader_signal');
+		if($s != ""){
+			$query->like("symbol",$s);
+		}
+		
+		$query->whereIn("timefream",["M30","H1","H4","D1"]);
+		$query->orderBy("id","DESC");
+		$query = $query->get(10);
+		return $query->getResult();
+
+	}
+
 
 	public function getSignalFinish(){
 		$query = $this->db->table('trader_signal_finish')->orderBy("id","DESC")->get(10);
