@@ -93,6 +93,12 @@
           },
           vibrate: [200, 100, 200, 100, 200, 100, 200]
         });
+
+        $(".totalsignal").html(Number(data.sl_total) + Number(data.tp_total));
+        $(".pipswin").html(data.tp_total_pips);
+        $(".piploss").html(data.tp_total_pips);
+        $(".usdwin").html("$"+data.usd_total);
+        
       });
 
     (function(){
@@ -148,9 +154,9 @@
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
                       <h6 class="text-center mb-0">Signal</h6>
-                      <span class="text-xs">Belong Interactive</span>
+                      <span class="text-xs">Total Number Order</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">+$2000</h5>
+                      <h5 class="mb-0 totalsignal"><?php echo ($report->sl_total + $report->tp_total);?></h5>
                     </div>
                   </div>
                 </div>
@@ -163,9 +169,9 @@
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
                       <h6 class="text-center mb-0">Win</h6>
-                      <span class="text-xs">Freelance Payment</span>
+                      <span class="text-xs">Total Pips Win</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">$455.00</h5>
+                      <h5 class="mb-0 pipswin"><?php echo ($report->tp_total_pips);?></h5>
                     </div>
                   </div>
                 </div>
@@ -178,9 +184,9 @@
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
                       <h6 class="text-center mb-0">Loss</h6>
-                      <span class="text-xs">Freelance Payment</span>
+                      <span class="text-xs">Total Pips SL</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">$455.00</h5>
+                      <h5 class="mb-0 piploss"><?php echo ($report->sl_total_pips);?></h5>
                     </div>
                   </div>
                 </div>
@@ -193,9 +199,9 @@
                     </div>
                     <div class="card-body pt-0 p-3 text-center">
                       <h6 class="text-center mb-0">USD</h6>
-                      <span class="text-xs">Freelance Payment</span>
+                      <span class="text-xs">Total USD</span>
                       <hr class="horizontal dark my-3">
-                      <h5 class="mb-0">$455.00</h5>
+                      <h5 class="mb-0 usdwin">$<?php echo ($report->usd_total);?></h5>
                     </div>
                   </div>
                 </div>

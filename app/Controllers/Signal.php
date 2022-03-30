@@ -19,7 +19,8 @@ class Signal extends BaseController
         $data = $this->query->getSignal($search);
         $dataWeek = $this->query->getSignalWeek($search);
         $finish = $this->query->getSignalFinish();
-		return view('pages/signal',["data" => $data, "week" => $dataWeek, "finish" => $finish, "header" => ["title" => "Smart Signal"]]);
+        $report = $this->query->getReport();
+		return view('pages/signal',["data" => $data, "week" => $dataWeek,"report" => $report, "finish" => $finish, "header" => ["title" => "Smart Signal"]]);
 	}
 
 	public function attemptProfile(){
@@ -68,7 +69,7 @@ class Signal extends BaseController
 				"finish" => $data->finish
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
-			$client->request('post', 'http://localhost:7000/finish', ["json" => $arvObj]);
+			@$client->request('post', 'http://localhost:7000/finish', ["json" => $arvObj]);
 			$msg = "";
 			
 			$reply_telegram_postid = $arvObj->message_id_group;

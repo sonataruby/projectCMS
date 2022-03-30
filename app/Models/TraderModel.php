@@ -77,11 +77,46 @@ class TraderModel extends Model
 			];
 		
 		if($info) $this->db->table('trader_signal_finish')->insert($arv);
+		
 		$arv["message_id_group"] = $info->message_id_group;
-		return $arv;
+		return $this->updateReport($arv);
+		//return $arv;
 	}
 
+	public function updateReport($arv){
+		$info = $this->db->table('trader_report')->where(["id" => 1])->get(1)->getResult()[0];
 
+		$arvUpdate = [];
+		$arvUpdate["usd_total"] = $info->usd_total + $arv["profit_usd"];
+		if($arv["close_type"] == "sl" && $arv["profit_pip"] < 0){
+			$arvUpdate["sl_total"] = $info->sl_total + 1;
+			$arvUpdate["sl_total_pips"] = $info->sl_total_pips + $arv["profit_pip"];
+
+		}
+		if($arv["profit_pip"] > 0){
+			$arvUpdate["tp_total"] = $info->tp_total + 1;
+			$arvUpdate["tp_total_pips"] = $info->tp_total_pips + $arv["profit_pip"];
+			if($arv["is_access"] == "Vip"){
+				$arvUpdate["tp_total_vip_pips"] = $info->tp_total_vip_pips + $arv["profit_pip"];
+			}
+		}
+
+		$this->db->table('trader_report')->where(["id" => 1])->update($arvUpdate);
+		$reinfo = $this->getReport();
+		$arv["sl_total"] = $reinfo->sl_total;
+		$arv["sl_total_pips"] = $reinfo->sl_total_pips;
+		$arv["tp_total"] = $reinfo->tp_total;
+		$arv["tp_total_pips"] = $reinfo->tp_total_pips;
+		$arv["tp_total_vip_pips"] = $reinfo->tp_total_vip_pips;
+		$arv["usd_total"] = $reinfo->usd_total;
+		return $arv;
+
+	}
+
+	public function getReport(){
+		$reinfo = $this->db->table('trader_report')->where(["id" => 1])->get(1)->getResult();
+		return $reinfo[0];
+	}
 	public  function updateMsgIDOrder($obj)
 	{
 		$this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);
