@@ -230,7 +230,7 @@
                     if(count($data) == 0){
                       ?>
                     <tr>
-                      <td colspan="5">No Signal avalible</td>
+                      <td colspan="5" class="text-center">No Signal avalible</td>
                     </tr>
                       <?php
                     }
@@ -269,7 +269,7 @@
                   <?php 
                     if(count($week) == 0){
                       ?>
-                    <div>
+                    <div class="col-md-12 text-center">
                         <h6 class="mb-1 text-dark text-sm">No Signal Avalible</h6>
                         <span class="text-xs">Wait time open</span>
                     </div>
