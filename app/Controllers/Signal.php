@@ -81,6 +81,10 @@ class Signal extends BaseController
 					$msg = "Hit TP : ".$data->target;
 				}else if($data->target == 3){
 					$msg = "Hit TP : ".$data->target."\nComplete Round";
+				}else if($data->target == 4){
+					$msg = "Hit TP : DCA1";
+				}else if($data->target == 5){
+					$msg = "Hit TP : DCA2";
 				}
 			}else if(strtolower($data->type) == "sl"){
 				$msg = "Hit SL finish round ";
