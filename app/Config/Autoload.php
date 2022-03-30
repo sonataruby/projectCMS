@@ -84,5 +84,5 @@ class Autoload extends AutoloadConfig
      *
      * @var array<int, string>
      */
-    public $files = [APPPATH . '/smartos.php'];
+    public $files = [APPPATH . '/SmartOS.php'];
 }
