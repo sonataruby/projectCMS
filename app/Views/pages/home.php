@@ -1,6 +1,7 @@
 <?= $this->extend("App\Views\home") ?>
 <?= $this->section('main') ?>
   <?= $this->section('javascript') ?>
+  <script src="./assets/js/plugins/chartjs.min.js"></script>
        <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 

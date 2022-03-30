@@ -75,7 +75,7 @@ if(is_array($components) && count($components) > 0){
   </div>
   
 
-  <script src="./assets/js/plugins/chartjs.min.js"></script>
+  
   
 
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
