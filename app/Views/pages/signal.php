@@ -226,7 +226,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($data as $item){?>
+                    <?php 
+                    if(count($data) == 0){
+                      ?>
+                    <tr>
+                      <td colspan="5">No Signal avalible</td>
+                    </tr>
+                      <?php
+                    }
+                    foreach($data as $item){?>
                     <tr>
                       <td>
                         <div class="d-flex align-items-center">
@@ -243,7 +251,9 @@
                       <td><?php echo $item->tp;?></td>
                       <td class="text-right"><button class="btn btn-icon-only btn-rounded btn-outline-primary mb-0 me-3 btn-sm  align-items-center justify-content-center"><i class="fas fa-arrow-right"></i></button></td>
                     </tr>
-                    <?php } ?>
+                    <?php } 
+                    
+                    ?>
                   </tbody>
                 </table>
               </div>
@@ -256,6 +266,15 @@
               </div>
               <div class="card-body">
                 <div class="row">
+                  <?php 
+                    if(count($week) == 0){
+                      ?>
+                    <div>
+                        <h6 class="mb-1 text-dark text-sm">No Signal Avalible</h6>
+                        <span class="text-xs">Wait time open</span>
+                    </div>
+                      <?php
+                   }?>
                   <?php foreach($week as $item){?>
                     <div class="col-md-3">
                         <img src="https://tinypng.com/images/social/website.jpg" class="card-img-top" alt="...">
@@ -294,6 +313,7 @@
             <div class="card-body pt-4 p-3">
               
               <ul class="list-group" id="orderComplete">
+
                 <?php foreach($finish as $item){ ?>
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex align-items-center">
