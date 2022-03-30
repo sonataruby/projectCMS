@@ -126,7 +126,7 @@ class TraderModel extends Model
 			$num_sig++;
 			$usd = $usd + $value->profit_usd;
 			if($value->profit_pip > 0) $win = $win + $value->profit_pip;
-			if($value->profit_pip < 0) $win = $loss + $value->profit_pip;
+			if($value->profit_pip < 0) $loss = $loss + $value->profit_pip;
 
 		}
 		$daily = [
