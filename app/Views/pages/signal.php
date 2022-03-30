@@ -215,7 +215,52 @@
       <div class="row">
         <div class="col-md-7 mt-4">
           
-          <div class="card mb-3">
+          
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>Order  <h6 class="mb-0"><?php echo ($report->daily->numsig);?></h6></div>
+                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>Win  <h6 class="mb-0"><?php echo ($report->daily->win);?> <span class="text-xs">pips</span></h6></div>
+                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>Loss  <h6 class="mb-0"><?php echo ($report->daily->loss);?> <span class="text-xs">pips</span></h6></div>
+                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>USD  <h6 class="mb-0"><?php echo ($report->daily->usd);?> $</h6></div>
+                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="card mb-3">
             <div class="card-header pb-0 px-3">
               <div class="row">
                 <div class="col-6 d-flex align-items-center">

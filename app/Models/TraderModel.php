@@ -117,6 +117,25 @@ class TraderModel extends Model
 
 	public function getReport(){
 		$reinfo = $this->db->table('trader_report')->where(["id" => 1])->get(1)->getResult();
+		$reportdayly = $this->db->table('trader_signal_finish')->where(['daily' => date('Y-m-d') ])->get()->getResult();
+		$num_sig = 0;
+		$win = 0;
+		$loss = 0;
+		$usd = 0;
+		foreach ($reportdayly as $key => $value) {
+			$num_sig++;
+			$usd = $usd + $value->profit_usd;
+			if($value->profit_pip > 0) $win = $win + $value->profit_pip;
+			if($value->profit_pip < 0) $win = $loss + $value->profit_pip;
+
+		}
+		$daily = [
+			"win" => $win,
+			"loss" => $loss,
+			"numsig" => $num_sig,
+			"usd" => $usd
+		];
+		$reinfo[0]->daily = (Object)$daily;
 		return $reinfo[0];
 	}
 	public  function updateMsgIDOrder($obj)
