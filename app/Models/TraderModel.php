@@ -61,7 +61,14 @@ class TraderModel extends Model
 			];
 		
 		if($info) $this->db->table('trader_signal_finish')->insert($arv);
+		$arv["message_id_group"] = $info->message_id_group;
 		return $arv;
+	}
+
+
+	public  function updateMsgIDOrder($obj)
+	{
+		$this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);
 	}
 }
 
