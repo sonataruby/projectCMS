@@ -128,7 +128,7 @@ class Signal extends BaseController
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	    //  execute post
 	    $result = curl_exec($ch);
-	    print_r($result);
+	    //print_r($result);
 	    //  close connection
 	    curl_close($ch);
 	}
