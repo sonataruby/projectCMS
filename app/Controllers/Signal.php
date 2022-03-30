@@ -26,7 +26,7 @@ class Signal extends BaseController
 
 	}
 	public function test(){
-		print_r($this->query->test());
+		print_r($this->telegram("46323","Hit Tp 1"));
 	}
 	public function api($type=""){
 		$data  = json_decode($this->request->getGet('query'));
@@ -104,14 +104,14 @@ class Signal extends BaseController
 		$group = "@smartiqx";
 	    $token = "5209738152:AAG5MzyE3cJg75GoXcjZByW4W7fH4JknZCI";
 	    // following ones are optional, so could be set as null
-	    $disable_web_page_preview = null;
+	    $disable_web_page_preview = false;
 	    $reply_to_message_id = $reply_id;
 	   
 	    $data = array(
-	            'chat_id' => urlencode($group),
-	            'text' => urlencode($msg),
-	            'disable_web_page_preview' => urlencode($disable_web_page_preview),
-	            'reply_to_message_id' => urlencode($reply_to_message_id)
+	            'chat_id' => $group,
+	            'text' => $msg,
+	            'disable_web_page_preview' => false,
+	            'reply_to_message_id' => $reply_to_message_id
 	        );
 
 	    $url = "https://api.telegram.org/bot".$token."/sendMessage";
@@ -128,6 +128,7 @@ class Signal extends BaseController
 	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	    //  execute post
 	    $result = curl_exec($ch);
+	    print_r($result);
 	    //  close connection
 	    curl_close($ch);
 	}
