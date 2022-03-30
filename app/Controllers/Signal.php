@@ -27,7 +27,7 @@ class Signal extends BaseController
 
 	}
 	public function test(){
-		print_r($this->telegram("46323","Hit Tp 1"));
+		//$this->scanTelegramID(1804);
 	}
 	public function api($type=""){
 		$data  = json_decode($this->request->getGet('query'));
@@ -97,10 +97,32 @@ class Signal extends BaseController
 				"message_id" => $data->telegram,
 				"message_id_group" => $data->reply_id
 			];
-			$this->query->updateMsgIDOrder((Object)$arv);
+			
+			if($data->reply_id > 0) $this->query->updateMsgIDOrder((Object)$arv);
 		}
 	}
 
+	public function scanTelegramID($telegramid=0){
+		$msgid = 0;
+		$token = "5209738152:AAG5MzyE3cJg75GoXcjZByW4W7fH4JknZCI";
+		$client = \Config\Services::curlrequest();
+		$data = $client->request('GET', 'https://api.telegram.org/bot'.$token.'/getUpdates?limit=150')->getBody();
+		$json = json_decode($data);
+		foreach ($json->result as $key => $value) {
+			print_r($value->message->forward_from_message_id."<br>");
+			if(is_object($value->message)  && $value->message->message_id && $value->message->forward_from_message_id){
+				//print_r($value->message->forward_from_message_id."<br>");
+				if($telegramid == $value->message->forward_from_message_id && is_object($value->message->from)){
+					print_r($value);
+					if($value->message->from->is_bot == false && $value->message->from->first_name == "Telegram"){
+						$msgid = $value->message->message_id;
+					}
+				}
+			}
+		}
+		print_r($msgid);
+	}
+	
 
 	public function telegram($reply_id, $msg){
 		
