@@ -319,12 +319,12 @@
                   <div class="d-flex align-items-center">
                     <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo $item->type;?> [Open : <?php echo $item->open;?> - Sl : <?php echo $item->sl;?> - Close : <?php echo $item->close_at;?>]</h6>
+                      <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo strtoupper($item->type);?> <?php echo $item->open;?></h6>
                       <span class="text-xs"><?php echo date("d-m h:i A",$item->opentime);?> - <?php echo date("d-m h:i A",$item->close_time);?></span>
                     </div>
                   </div>
                   <div class="d-flex align-items-center text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : ($item->profit_pip < 0 ? "danger text-gradient " : "secondary");?> text-sm font-weight-bold">
-                    <?php echo $item->profit_pip > 0 ? "+" : ($item->profit_pip < 0 ? "" : ":");?> <?php echo $item->profit_pip;?> pip(s)
+                    <?php echo $item->profit_pip > 0 ? "+" : ($item->profit_pip < 0 ? "" : ":");?> <?php echo $item->profit_pip;?> pip(s) | $<?php echo $item->profit_usd;?>
                   </div>
                 </li>
                 <?php } ?>
