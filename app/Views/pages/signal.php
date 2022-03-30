@@ -64,12 +64,12 @@
                   <div class="d-flex align-items-center">
                     <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"}  mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
                     <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">${data.symbol} ${data.type} [Open : ${data.open} - Sl : ${data.sl} - Close : ${data.close_at}]</h6>
-                      <span class="text-xs">${moment().format('D MMM, YYYY')} - ${moment().format('D MMM, YYYY')}</span>
+                      <h6 class="mb-1 text-dark text-sm">${data.symbol} ${data.type} ${data.open} </h6>
+                      <span class="text-xs">${moment(data.opentime).format('D MMM, YYYY')} - ${moment(data.close_time).format('D MMM, YYYY')}</span>
                     </div>
                   </div>
                   <div class="d-flex align-items-center text-${data.profit_pip > 0  ? "info text-gradient" : (data.profit_pip < 0 ? "danger text-gradient" : "secondary")} text-sm font-weight-bold">
-                    ${data.profit_pip > 0  ? "+" : (data.profit_pip < 0 ? "" : ":")} ${data.profit_pip} pip(s)
+                    ${data.profit_pip > 0  ? "+" : (data.profit_pip < 0 ? "" : ":")} ${data.profit_pip} pip(s) | $${data.profit_usd}
                   </div>
                 </li>`;
         if($("#orderComplete ul li").length > 0){
@@ -306,7 +306,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small><?php echo date('m-d-y h:i:s A');?></small>
+                  <small><?php echo date('m-d-Y h:i:s A');?></small>
                 </div>
               </div>
             </div>
