@@ -78,7 +78,7 @@ class TraderModel extends Model
 				"weekly" => (int)date('W')
 			];
 		$report_arv = $arv;
-		if($obj->target == 4 || $obj->target == 5) $report_arv["close_type"] = "TP DCA";
+		if($obj->target == 4 || $obj->target == 5) $report_arv["close_type"] = "DCA";
 		if($info) $this->db->table('trader_signal_finish')->insert($report_arv);
 		
 		$arv["message_id_group"] = $info->message_id_group;
