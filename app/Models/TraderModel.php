@@ -73,7 +73,9 @@ class TraderModel extends Model
 				"profit_usd" => $obj->usd,
 				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "close"),
 				"message_id" => $info->message_id,
-				"is_access" => $obj->target < 2 ? "Free" : "Vip"
+				"is_access" => $obj->target < 2 ? "Free" : "Vip",
+				"daily" => date("Y-m-d"),
+				"weekly" => (int)date('W')
 			];
 		
 		if($info) $this->db->table('trader_signal_finish')->insert($arv);

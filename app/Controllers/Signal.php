@@ -69,6 +69,7 @@ class Signal extends BaseController
 				"finish" => $data->finish
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
+			$client = \Config\Services::curlrequest();
 			@$client->request('post', 'http://localhost:7000/finish', ["json" => $arvObj]);
 			$msg = "";
 			
