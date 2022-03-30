@@ -136,7 +136,7 @@
                         </div>
                       </div>
                       <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                        <img class="w-60 mt-2" src="../assets/img/logos/mastercard.png" alt="logo">
+                        <img class="w-60 mt-2" src="/assets/img/logos/mastercard.png" alt="logo">
                       </div>
                     </div>
                   </div>
@@ -217,7 +217,14 @@
           
           <div class="card mb-3">
             <div class="card-header pb-0 px-3">
-              <h6 class="mb-0">Real Signal Daily</h6>
+              <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                  <h6 class="mb-0">Real Signal Daily</h6>
+                </div>
+                <div class="col-6 text-end">
+                  <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Update VIP</a>
+                </div>
+              </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive p-0">

@@ -1,7 +1,7 @@
 <?= $this->extend("App\Views\home") ?>
 <?= $this->section('main') ?>
   <?= $this->section('javascript') ?>
-  <script src="./assets/js/plugins/chartjs.min.js"></script>
+  <script src="/assets/js/plugins/chartjs.min.js"></script>
        <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -267,7 +267,7 @@
                     <td class="w-30">
                       <div class="d-flex px-2 py-1 align-items-center">
                         <div>
-                          <img src="./assets/img/icons/flags/US.png" alt="Country flag">
+                          <img src="/assets/img/icons/flags/US.png" alt="Country flag">
                         </div>
                         <div class="ms-4">
                           <p class="text-xs font-weight-bold mb-0">Country:</p>
