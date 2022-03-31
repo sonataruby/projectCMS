@@ -104,8 +104,14 @@
 
     socket.on("signal price", function (data) {
         for (var i = 0; i < data.length; i++) {
-          $(".price-"+data[i].id+" h6").html(data[i].usd+"$");
-          $(".price-"+data[i].id+" span").html(data[i].pips+" pip")
+          var color = "text-ssuccess";
+          var prefix = "+";
+          if(Number(data[i].usd) < 0) {
+            color = "text-danger";
+            prefix = "";
+          }
+          $(".price-"+data[i].id+" h6").html('<p class="'+color+'">'+prefix+data[i].usd+"$</p>");
+          $(".price-"+data[i].id+" span").html('<b class="'+color+'">'+prefix+data[i].pips+" pip</b>")
         }
         
     });
