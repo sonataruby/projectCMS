@@ -345,10 +345,10 @@
                    }?>
                   <?php foreach($week as $item){?>
                     <div class="col-md-3">
-                        <div class="border border-info border-radius-xl p-1">
-                        <div class="bg-gradient-info border-radius-xl text-white shadow-primary p-2">
+                        <div class="border border-<?php echo $item->type == "buy" ? "info" : "danger";?> border-radius-xl p-1">
+                        <div class="bg-gradient-<?php echo $item->type == "buy" ? "info" : "danger";?> border-radius-xl text-white shadow-primary p-2">
                           <div class="d-flex align-items-center">
-                            <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                            <button class="btn btn-icon-only btn-rounded btn-outline-light mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                             <div class="d-flex flex-column">
                               <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?></h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>
