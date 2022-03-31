@@ -145,19 +145,22 @@ class TraderModel extends Model
 	}
 
 	public function updateMsgIDOrderStatus($arv){
-
+		
+		$arvk = [];
+		
+		foreach ($arv as $key => $value) {
+			$arvk[] = $key;
+			$this->db->table('trader_signal')->where(["message_id" => $key])->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+		}
+		
 		$query = $this->db->table('trader_signal')->orderBy("id","DESC")->get(100)->getResult();
 		foreach ($query as $key => $value) {
-			foreach ($arv as $keyS => $valueS) {
-				if($value->message_id != $keyS){
-					$this->db->table('trader_signal')->delete(["message_id" => $value->message_id]);
-				}
+			if(!in_array($value->message_id,$arvk)){
+				//echo $value->message_id.".<br>";
+				$this->db->table('trader_signal')->delete(["message_id" => $value->message_id]);
 			}
 		}
 
-		foreach ($arv as $key => $value) {
-			$this->db->table('trader_signal')->where(["message_id" => $key])->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
-		}
 	}
 }
 
