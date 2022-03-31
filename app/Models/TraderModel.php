@@ -12,7 +12,7 @@ class TraderModel extends Model
 		if($s != ""){
 			$query->like("symbol",$s);
 		}
-		$query->whereIn("timefream",["M1","M5","M15"]);
+		$query->whereIn("timefream",["M1","M5"]);
 		
 		$query->orderBy("id","DESC");
 		$query = $query->get(10);
@@ -26,7 +26,7 @@ class TraderModel extends Model
 			$query->like("symbol",$s);
 		}
 		
-		$query->whereIn("timefream",["M30","H1","H4","D1"]);
+		$query->whereIn("timefream",["M15","M30","H1","H4","D1"]);
 		$query->orderBy("id","DESC");
 		$query = $query->get(10);
 		return $query->getResult();
