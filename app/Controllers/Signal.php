@@ -146,7 +146,7 @@ class Signal extends BaseController
 		$order = 0;
 		foreach ($query as $key => $value) {
 			$msg .= strtoupper($value->type)." ".$value->open." ".$value->profit_pip."\n";
-			$order+;
+			$order +=1;
 			$profit_pip = $profit_pip + $value->profit_pip;
 			$profit_usd = $profit_usd + $value->profit_usd;
 		}
