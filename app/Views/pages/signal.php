@@ -361,38 +361,59 @@
                 </div>
               </div>
               <div class="card-body">
-                <div class="row">
-                  <?php 
+
+
+                <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0" id="tablesignal">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Symbol</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Open</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stoploss</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Take Profit</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
                     if(count($week) == 0){
                       ?>
-                    <div class="col-md-12 text-center">
-                        <h6 class="mb-1 text-dark text-sm">No Signal Avalible</h6>
-                        <span class="text-xs">Wait time open</span>
-                    </div>
+                    <tr>
+                      <td colspan="5" class="text-center">No Signal avalible</td>
+                    </tr>
                       <?php
-                   }?>
-                  <?php foreach($week as $item){?>
-                    <div class="col-md-3">
-                        <div class="border border-<?php echo $item->type == "buy" ? "info" : "danger";?> border-radius-xl p-1">
-                        <div class="bg-gradient-<?php echo $item->type == "buy" ? "info" : "danger";?> border-radius-xl text-white shadow-primary p-2">
-                          <div class="d-flex align-items-center">
-                            <button class="btn btn-icon-only btn-rounded btn-outline-light mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                    }
+                    foreach($week as $item){?>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                             <div class="d-flex flex-column">
                               <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?></h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>
                             </div>
                           </div>
+                          
+                      </td>
+                      <td><?php echo $item->open;?></td>
+                      <td><?php echo $item->sl;?></td>
+                      <td><?php echo $item->tp;?></td>
+                      <td class="text-end price-<?php echo $item->message_id;?>">
+
+                        <div class="d-flex flex-column">
+                          <h6 class="mb-1 text-dark text-sm"><?php echo $item->status_usd;?>$</h6>
+                          <span class="text-xs"><?php echo $item->status_pips;?> pip</span>
                         </div>
-                        
-                        <div>
-                          Open : <?php echo $item->open;?><br>
-                          SL : <?php echo $item->sl;?><br>
-                          TP : <?php echo $item->tp;?>
-                        </div>
-                        </div>
-                    </div>
-                  <?php } ?>
-                </div>
+                      </td>
+                    </tr>
+                    <?php } 
+                    
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+
+                
               </div>
           </div>
 
