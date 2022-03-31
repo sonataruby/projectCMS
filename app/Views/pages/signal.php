@@ -438,7 +438,7 @@
           <div class="card mb-4 adsbygoogle">
             
             <a href="https://one.exness.link/a/tjm6vjm6">
-          <img src="https://d3dpet1g0ty5ed.cloudfront.net/EN_0821_INDICES_DEVICE_Want_better_indice_320x50px.jpg" width="100%"  alt="" />
+          <img src="https://d3dpet1g0ty5ed.cloudfront.net/EN_0821_INDICES_DEVICE_Want_better_indice_320x50px.jpg" width="100%" class="border-radius-xl"  alt="" />
         </a>
           </div>
           <div class="card mb-4">
