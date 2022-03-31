@@ -309,7 +309,7 @@
                       <td><?php echo $item->open;?></td>
                       <td><?php echo $item->sl;?></td>
                       <td><?php echo $item->tp;?></td>
-                      <td class="text-right"><?php echo $item->status_pips;?> pip | <?php echo $item->status_usd;?>$ <button class="btn btn-icon-only btn-rounded btn-outline-primary mb-0 me-3 btn-sm  align-items-center justify-content-center"><i class="fas fa-arrow-right"></i></button></td>
+                      <td class="text-end"><?php echo $item->status_pips;?> pip | <?php echo $item->status_usd;?>$ <button class="btn btn-icon-only btn-rounded btn-outline-primary mb-0 me-3 btn-sm  align-items-center justify-content-center"><i class="fas fa-arrow-right"></i></button></td>
                     </tr>
                     <?php } 
                     
