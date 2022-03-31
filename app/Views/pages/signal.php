@@ -32,7 +32,7 @@
                       <td>${data.open}</td>
                       <td>${data.sl}</td>
                       <td>${data.tp}</td>
-                      <td>${moment().format('D MMM, YYYY')}</td>
+                      <td class="text-end price-${data.message_id}">0.0</td>
                     </tr>`;
         if($("#tablesignal tbody tr").length > 0){
             $("#tablesignal tbody tr:first").before(html);
@@ -105,6 +105,9 @@
         setInterval(function(){
             var html =`<ins class="adsbygoogle" style="display:inline-block;width:100%;height:250px" data-ad-client="ca-pub-4099957745291159" data-ad-slot="1384479382"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>`;
           $(".adsbygoogle").html(html);
+          $.get("/signal/api/getprice", function(data){
+            console.log(data);
+          });
         },600000);
     })();
     </script>
@@ -309,7 +312,7 @@
                       <td><?php echo $item->open;?></td>
                       <td><?php echo $item->sl;?></td>
                       <td><?php echo $item->tp;?></td>
-                      <td class="text-end">
+                      <td class="text-end price-<?php echo $item->message_id;?>">
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm"><?php echo $item->status_usd;?>$</h6>
                           <span class="text-xs"><?php echo $item->status_pips;?> pip</span>

@@ -124,6 +124,18 @@ class Signal extends BaseController
 			if($arv) $this->query->updateMsgIDOrderStatus($arv);
 			
 		}
+		if($type == "getprice"){
+			$query = $this->query->getSignal();
+			$arv = [];
+			foreach ($query as $key => $value) {
+				$arv[] = [
+					"id" => $value->message_id,
+					"pips" => $value->status_pips,
+					"usd" => $value->status_usd,
+				];
+			}
+			print_r(json_encode($arv));
+		}
 	}
 
 	public function scanTelegramID($telegramid=0){
