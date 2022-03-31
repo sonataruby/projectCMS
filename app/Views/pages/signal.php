@@ -437,7 +437,9 @@
         <div class="col-lg-5 mt-4">
           <div class="card mb-4 adsbygoogle">
             
-          
+            <a href="https://one.exness.link/a/tjm6vjm6">
+          <img src="https://d3dpet1g0ty5ed.cloudfront.net/EN_0821_INDICES_DEVICE_Want_better_indice_320x50px.jpg" width="320" height="50" alt="" />
+        </a>
           </div>
           <div class="card mb-4">
             <div class="card-header pb-0 px-3">
@@ -447,7 +449,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                   <i class="far fa-calendar-alt me-2"></i>
-                  <small><?php echo date('m-d-Y h:i:s A');?></small>
+                  <small><?php echo date('d-m h:i A');?></small>
                 </div>
               </div>
             </div>
