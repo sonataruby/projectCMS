@@ -81,6 +81,7 @@
         if($("#orderComplete ul li").length > 10){
           $("#orderComplete ul li:last").remove();
         }
+        console.log(data);
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
 
