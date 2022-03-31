@@ -20,6 +20,19 @@ class TraderModel extends Model
 
 	}
 
+	public function getSignalAll($s=""){
+		$query = $this->db->table('trader_signal');
+		if($s != ""){
+			$query->like("symbol",$s);
+		}
+		
+		$query->orderBy("id","DESC");
+		$query = $query->get(100);
+		return $query->getResult();
+
+	}
+
+
 	public function getSignalWeek($s=""){
 		$query = $this->db->table('trader_signal');
 		if($s != ""){
@@ -36,6 +49,13 @@ class TraderModel extends Model
 
 	public function getSignalFinish(){
 		$query = $this->db->table('trader_signal_finish')->orderBy("id","DESC")->get(10);
+		return $query->getResult();
+
+	}
+	public function getSignalFinishByKey($message_id=0){
+		if($message_id == 0) return [];
+
+		$query = $this->db->table('trader_signal_finish')->where("message_id",$message_id)->orderBy("id","DESC")->get();
 		return $query->getResult();
 
 	}

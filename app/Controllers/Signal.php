@@ -76,22 +76,17 @@ class Signal extends BaseController
 			$msg = "";
 			
 			$readObj = (Object)$arvObj;
-			$reply_telegram_postid = $readObj->message_id_group;
+			$reply_telegram_postid = $readObj->message_id;
 
-			if(strtolower($data->type) == "tp"){
-				if($data->target < 3){
-					$msg = "Hit TP : ".$data->target;
-				}else if($data->target == 3){
-					$msg = "Hit TP : ".$data->target."\nComplete Round";
-				}else if($data->target == 4){
-					$msg = "Hit TP : DCA1";
-				}else if($data->target == 5){
-					$msg = "Hit TP : DCA2";
-				}
+			if(strtolower($data->type) == "tp" && ($data->target == 3 || $data->finish == "yes")){
+				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
+				$msg .= $this->getMsgTelegramFinish($data->telegram);//Get masg Complete
 			}else if(strtolower($data->type) == "sl"){
-				$msg = "Hit SL finish round ";
-			}else if(strtolower($data->type) == "close"){
-				$msg = "Close finish round ";
+				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
+				$msg .= $this->getMsgTelegramFinish($data->telegram);//Get masg Complete
+			}else if(strtolower($data->type) == "close" && $data->finish == "yes"){
+				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
+				$msg .= $this->getMsgTelegramFinish($data->telegram);
 			}
 			
 			$this->telegram($reply_telegram_postid,$msg);
@@ -143,6 +138,27 @@ class Signal extends BaseController
 		
 	}
 
+	public function getMsgTelegramFinish($msg_id){
+		$query = $this->query->getSignalFinishByKey($msg_id);
+		$msg = "";
+		$profit_pip = 0;
+		$profit_usd = 0;
+		$order = 0;
+		foreach ($query as $key => $value) {
+			$msg .= strtoupper($value->type)." ".$value->open." ".$value->profit_pip."\n";
+			$order+;
+			$profit_pip = $profit_pip + $value->profit_pip;
+			$profit_usd = $profit_usd + $value->profit_usd;
+		}
+		$msg .= "===============================\n";
+		$msg .= "Order Open : ".$order."\n";
+		$msg .= "Profit Pips : ".$profit_pip." pip(s)\n";
+		$msg .= "Profit USD : ".$profit_usd." USD\n";
+		$msg .= "===============================\n";
+		$msg .=  "AI System trader #BTC, #ETH, #Crypto, #Forex, #Sock\n";
+		$msg .=  "Check real signal free : https://expressiq.co/signal";
+		return $msg;
+	}
 	public function scanTelegramID($telegramid=0){
 		$msgid = 0;
 		$token = "5209738152:AAG5MzyE3cJg75GoXcjZByW4W7fH4JknZCI";
@@ -167,7 +183,7 @@ class Signal extends BaseController
 
 	public function telegram($reply_id, $msg){
 		
-		$group = "@smartiqx";
+		$group = "@goldslacp";
 	    $token = "5209738152:AAG5MzyE3cJg75GoXcjZByW4W7fH4JknZCI";
 	    // following ones are optional, so could be set as null
 	    $disable_web_page_preview = false;
