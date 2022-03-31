@@ -439,7 +439,7 @@
             
           
           </div>
-          <div class="card h-100 mb-4">
+          <div class="card mb-4">
             <div class="card-header pb-0 px-3">
               <div class="row">
                 <div class="col-md-6">
