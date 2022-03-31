@@ -105,6 +105,25 @@ class Signal extends BaseController
 			
 			if($data->reply_id > 0) $this->query->updateMsgIDOrder((Object)$arv);
 		}
+
+		if($type == "status"){
+			$extract = explode(";", $this->request->getGet('query'));
+
+			$arv = [];
+			foreach ($extract as $key => $value) {
+				list($key_id,$usd, $pips) = explode("|", $value);
+				
+				if($arv[$key_id] > 0){
+					$arv[$key_id]["usd"] = $arv[$key_id]["usd"] + $usd;
+					$arv[$key_id]["pips"] = $arv[$key_id]["pips"] + $pips;
+				}else{
+					$arv[$key_id]["usd"] = $usd;
+					$arv[$key_id]["pips"] = $pips;
+				}
+			}
+			if($arv) $this->query->updateMsgIDOrderStatus($arv);
+			
+		}
 	}
 
 	public function scanTelegramID($telegramid=0){
