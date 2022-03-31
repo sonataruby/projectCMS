@@ -104,14 +104,16 @@
 
     socket.on("signal price", function (data) {
         for (var i = 0; i < data.length; i++) {
-          var color = "text-ssuccess";
+          var color = "text-success";
           var prefix = "+";
           if(Number(data[i].usd) < 0) {
             color = "text-danger";
             prefix = "";
           }
-          $(".price-"+data[i].id+" h6").html('<i class="'+color+'">'+prefix+data[i].usd+"$</i>");
-          $(".price-"+data[i].id+" span").html('<i class="'+color+'">'+prefix+data[i].pips+" pip</i>")
+          
+          $(".price-"+data[i].id+" h6").parent().attr("class","d-flex flex-column "+color);
+          $(".price-"+data[i].id+" h6").html(prefix+data[i].usd+"$");
+          $(".price-"+data[i].id+" span").html(prefix+data[i].pips+" pip");
         }
         
     });
@@ -329,6 +331,7 @@
                       <td><?php echo $item->sl;?></td>
                       <td><?php echo $item->tp;?></td>
                       <td class="text-end price-<?php echo $item->message_id;?>">
+
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm"><?php echo $item->status_usd;?>$</h6>
                           <span class="text-xs"><?php echo $item->status_pips;?> pip</span>
