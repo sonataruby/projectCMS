@@ -18,7 +18,7 @@
 
       socket.on("signal create", function (data) {
         
-        var html = `<tr>
+        var html = `<tr class="border-warning">
                       <td>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"} mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
