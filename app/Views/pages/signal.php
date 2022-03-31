@@ -309,7 +309,7 @@
                       <td><?php echo $item->open;?></td>
                       <td><?php echo $item->sl;?></td>
                       <td><?php echo $item->tp;?></td>
-                      <td class="text-end">
+                      <td class="d-flex align-items-end text-end">
                         <div class="d-flex flex-column">
                           <h6 class="mb-1 text-dark text-sm"><?php echo $item->status_usd;?>$</h6>
                           <span class="text-xs"><?php echo $item->status_pips;?> pip</span>
