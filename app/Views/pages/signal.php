@@ -23,7 +23,7 @@
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"} mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
                             <div class="d-flex flex-column">
-                              <h6 class="mb-1 text-dark text-sm">${data.symbol}</h6>
+                              <h6 class="mb-1 text-dark text-sm">${data.symbol} [${data.type}]</h6>
                               <span class="text-xs">${moment().format('D MMM, YYYY')}</span>
                             </div>
                           </div>
@@ -34,14 +34,28 @@
                       <td>${data.tp}</td>
                       <td class="text-end price-${data.message_id}">0.0</td>
                     </tr>`;
-        if($("#tablesignal tbody tr").length > 0){
-            $("#tablesignal tbody tr:first").before(html);
+        if(data.timefream == "M5" || data.timefream == "M1"){
+            if($("#tablesignal tbody tr").length > 0){
+              $("#tablesignal tbody tr:first").before(html);
+            }else{
+              $("#tablesignal tbody").append(html);
+            }
+            if($("#tablesignal tbody tr").length > 5){
+              $("#tablesignal tbody tr:last").remove();
+            }
         }else{
-          $("#tablesignal tbody").append(html);
+            if($("#tablesignalWeek tbody tr").length > 0){
+              $("#tablesignalWeek tbody tr:first").before(html);
+            }else{
+              $("#tablesignalWeek tbody").append(html);
+            }
+            if($("#tablesignalWeek tbody tr").length > 5){
+              $("#tablesignalWeek tbody tr:last").remove();
+            }
         }
-        if($("#tablesignal tbody tr").length > 5){
-          $("#tablesignal tbody tr:last").remove();
-        }
+        
+
+        
 
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
@@ -322,7 +336,7 @@
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                             <div class="d-flex flex-column">
-                              <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?></h6>
+                              <h6 class="mb-1 text-sm text-<?php echo $item->type == "buy" ? "info" : "danger";?>"><?php echo $item->symbol;?> [<?php echo strtoupper($item->type);?>]</h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>
                             </div>
                           </div>
@@ -364,7 +378,7 @@
 
 
                 <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0" id="tablesignal">
+                <table class="table align-items-center mb-0" id="tablesignalWeek">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Symbol</th>
@@ -389,7 +403,7 @@
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                             <div class="d-flex flex-column">
-                              <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?></h6>
+                              <h6 class="mb-1 text-sm text-<?php echo $item->type == "buy" ? "info" : "danger";?>"><?php echo $item->symbol;?> [<?php echo strtoupper($item->type);?>]</h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>
                             </div>
                           </div>
