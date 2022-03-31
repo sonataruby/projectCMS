@@ -112,8 +112,11 @@
     (function(){
         setInterval(function(){
             
-          $.get("/signal/api/getprice", function(data){
-            console.log(data);
+          axios.get("/signal/api/getprice").then(function(data){
+            for (var i = 0; i < data.length; i++) {
+              $(".price-"+data[i].id+" h6").html(data[i].usd+"$");
+              $(".price-"+data[i].id+" span").html(data[i].pips+" pip")
+            }
           });
         },60000);
     })();
