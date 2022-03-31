@@ -13,7 +13,7 @@ class Profile extends BaseController
 
         
 
-		return view('pages/profile');
+		return view('pages/profile',["user" => userinfo()]);
 	}
 
 	public function attemptProfile(){

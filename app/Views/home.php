@@ -13,18 +13,26 @@
       <?php echo view('leftmenu'); ?>
     </div>
     <div class="sidenav-footer mx-3 ">
+      <?php if(logged_in()){ ?>
       <div class="card card-plain shadow-none" id="sidenavCard">
         <img class="w-30 mx-auto rounded-circle img-fluid border border-2 border-white" src="/assets/img/team-2.jpg" alt="sidebar_illustration">
       </div>
       <a href="/profile" class="btn btn-dark btn-sm w-100 mb-3">Profile</a>
       <a class="btn btn-primary btn-sm mb-0 w-100" href="/logout" type="button">Logout</a>
+      <?php }else{ ?>
+        <div class="card card-plain shadow-none" id="sidenavCard">
+          <img class="w-30 mx-auto rounded-circle img-fluid border border-2 border-white" src="/assets/img/team-2.jpg" alt="sidebar_illustration">
+        </div>
+        <a href="/login" class="btn btn-dark btn-sm w-100 mb-3">Login</a>
+        <a class="btn btn-primary btn-sm mb-0 w-100" href="/register" type="button">Register</a>
+      <?php } ?>
     </div>
 
   </aside>
   <main class="main-content position-relative border-radius-lg ">
     
     <!-- Navbar -->
-    <?php if($nav != false) echo view('nav'); ?>
+    <?php echo view('nav'); ?>
     <!-- End Navbar -->
     <?= $this->renderSection('main') ?>
   </main>

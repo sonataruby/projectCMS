@@ -213,11 +213,11 @@
         
       </div>
       <div class="row">
-        <div class="col-md-7 mt-4">
+        <div class="col-lg-7 mt-4">
           
           
             <div class="row mb-3">
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6">
                 <div class="card card-body mb-3">
                   <div class="d-flex justify-content-between">
                       <div>Order  <h6 class="mb-0"><?php echo ($report->daily->numsig);?></h6></div>
@@ -228,7 +228,7 @@
                   
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6">
                 <div class="card card-body mb-3">
                   <div class="d-flex justify-content-between">
                       <div>Win  <h6 class="mb-0"><?php echo ($report->daily->win);?> <span class="text-xs">pips</span></h6></div>
@@ -238,7 +238,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6">
                 <div class="card card-body mb-3">
                   <div class="d-flex justify-content-between">
                       <div>Loss  <h6 class="mb-0"><?php echo ($report->daily->loss);?> <span class="text-xs">pips</span></h6></div>
@@ -248,7 +248,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-lg-3 col-md-6">
                 <div class="card card-body mb-3">
                   <div class="d-flex justify-content-between">
                       <div>USD  <h6 class="mb-0"><?php echo ($report->daily->usd);?> $</h6></div>
@@ -321,7 +321,15 @@
 
           <div class="card">
               <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">Real Signal Week</h6>
+                <div class="row">
+                  <div class="col-6 d-flex align-items-center">
+                    <h6 class="mb-0">Real Signal Week</h6>
+                  </div>
+                  <div class="col-6 text-end">
+                    
+                    <?php echo components("admin\create_signal",['text' => '<i class="fas fa-plus"></i>&nbsp;&nbsp;Share Signal', 'class' => 'btn bg-gradient-dark mb-0']);?>
+                  </div>
+                </div>
               </div>
               <div class="card-body">
                 <div class="row">
@@ -352,7 +360,7 @@
 
 
         </div>
-        <div class="col-md-5 mt-4">
+        <div class="col-lg-5 mt-4">
           <div class="card mb-4 adsbygoogle">
             
           
