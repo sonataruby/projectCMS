@@ -42,6 +42,10 @@ class TraderModel extends Model
 
 	public function createOrder($obj){
 		//print_r($obj);
+		$date = explode(" ",$obj["time"]);
+		list($year,$month,$day) = explode(".", $date[0]);
+		$obj["opentime"] = $month."-".$day."-".$year." ".$date[1];
+
 		$this->db->table('trader_signal')->insert($obj);
 	}
 
@@ -60,6 +64,9 @@ class TraderModel extends Model
 		if($action == "sl" || $obj->target == 3 || $obj->finish == "yes"){
 			$this->db->table('trader_signal')->delete(["message_id" => $obj->message_id]);//Remove Complete Order
 		}
+		$date = explode(" ",$obj->time);
+		list($year,$month,$day) = explode(".", $date[0]);
+		$formatday = $month."-".$day."-".$year." ".$date[1];
 		$arv = [
 				"signals_id" => $info->id,
 				"type" => $info->type,
@@ -74,7 +81,7 @@ class TraderModel extends Model
 				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "close"),
 				"message_id" => $info->message_id,
 				"is_access" => $obj->target < 2 ? "Free" : "Vip",
-				"daily" => date("Y-m-d"),
+				"daily" => $formatday,
 				"weekly" => (int)date('W')
 			];
 		$report_arv = $arv;

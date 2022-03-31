@@ -47,7 +47,8 @@ class Signal extends BaseController
 				"message_id" => $data->telegram,
 				"message_id_group" => $data->relymsg,
 				"timefream" => $data->tf, 
-				"chart" => ""
+				"chart" => "",
+				"time" => $data->time
 			];
 
 			$this->query->createOrder($arv);
@@ -66,7 +67,8 @@ class Signal extends BaseController
 				"close_type" => strtolower($data->type),
 				"usd" => $data->usd,
 				"message_id" => $data->telegram,
-				"finish" => $data->finish
+				"finish" => $data->finish,
+				"time" => $data->time
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
 			$client = \Config\Services::curlrequest();
