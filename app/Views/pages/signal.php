@@ -56,8 +56,9 @@
           },
           vibrate: [200, 100, 200, 100, 200, 100, 200]
         });
-
-      });
+      var html =`<ins class="adsbygoogle" style="display:inline-block;width:100%;height:250px" data-ad-client="ca-pub-4099957745291159" data-ad-slot="1384479382"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>`;
+      $(".adsbygoogle").html(html);
+    });
     socket.on("signal finish", function (data) {
         
         var html = `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -101,6 +102,14 @@
         
       });
 
+    socket.on("signal price", function (data) {
+        for (var i = 0; i < data.length; i++) {
+          $(".price-"+data[i].id+" h6").html(data[i].usd+"$");
+          $(".price-"+data[i].id+" span").html(data[i].pips+" pip")
+        }
+        
+    });
+
     (function(){
         setInterval(function(){
             var html =`<ins class="adsbygoogle" style="display:inline-block;width:100%;height:250px" data-ad-client="ca-pub-4099957745291159" data-ad-slot="1384479382"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>`;
@@ -109,17 +118,7 @@
         },600000);
     })();
 
-    (function(){
-        setInterval(function(){
-            
-          axios.get("/signal/api/getprice").then(function(data){
-            for (var i = 0; i < data.length; i++) {
-              $(".price-"+data[i].id+" h6").html(data[i].usd+"$");
-              $(".price-"+data[i].id+" span").html(data[i].pips+" pip")
-            }
-          });
-        },60000);
-    })();
+    
 
     </script>
 

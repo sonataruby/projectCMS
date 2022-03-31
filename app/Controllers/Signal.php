@@ -70,7 +70,7 @@ class Signal extends BaseController
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
 			$client = \Config\Services::curlrequest();
-			@$client->request('post', 'http://localhost:7000/finish', ["json" => $arvObj]);
+			@$client->request('post', 'http://localhost:7000/finish', ["json" => (Array)$arvObj]);
 			$msg = "";
 			
 			$readObj = (Object)$arvObj;
@@ -123,19 +123,22 @@ class Signal extends BaseController
 			}
 			if($arv) $this->query->updateMsgIDOrderStatus($arv);
 			
-		}
-		if($type == "getprice"){
+
 			$query = $this->query->getSignal();
-			$arv = [];
+			$arvPush = [];
 			foreach ($query as $key => $value) {
-				$arv[] = [
+				$arvPush[] = [
 					"id" => $value->message_id,
 					"pips" => $value->status_pips,
 					"usd" => $value->status_usd,
 				];
 			}
-			print_r(json_encode($arv));
+
+			$client = \Config\Services::curlrequest();
+			@$client->request('post', 'http://localhost:7000/price', ["json" => (Array)$arvPush]);
+
 		}
+		
 	}
 
 	public function scanTelegramID($telegramid=0){
