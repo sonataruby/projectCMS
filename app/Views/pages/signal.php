@@ -105,11 +105,19 @@
         setInterval(function(){
             var html =`<ins class="adsbygoogle" style="display:inline-block;width:100%;height:250px" data-ad-client="ca-pub-4099957745291159" data-ad-slot="1384479382"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>`;
           $(".adsbygoogle").html(html);
+         
+        },600000);
+    })();
+
+    (function(){
+        setInterval(function(){
+            
           $.get("/signal/api/getprice", function(data){
             console.log(data);
           });
-        },600000);
+        },60000);
     })();
+
     </script>
 
     
