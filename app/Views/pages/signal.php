@@ -18,7 +18,7 @@
 
       socket.on("signal create", function (data) {
         
-        var html = `<tr>
+        var html = `<tr class="live-${data.message_id}">
                       <td>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"} mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
@@ -75,27 +75,34 @@
     });
     socket.on("signal finish", function (data) {
         
-        var html = `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"}  mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">${data.symbol} ${data.type} ${data.open} </h6>
-                      <span class="text-xs">${moment(data.opentime).format('D MMM, YYYY')} - ${moment(data.close_time).format('D MMM, YYYY')}</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-${data.profit_pip > 0  ? "info text-gradient" : (data.profit_pip < 0 ? "danger text-gradient" : "secondary")} text-sm font-weight-bold">
-                    ${data.profit_pip > 0  ? "+" : (data.profit_pip < 0 ? "" : ":")} ${data.profit_pip} pip(s) | $${data.profit_usd}
-                  </div>
-                </li>`;
-        if($("#orderComplete ul li").length > 0){
-            $("#orderComplete ul li:first").before(html);
+        var html = `<tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"} mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
+                          <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">${data.symbol} [${String(data.type).toUpperCase()}]</h6>
+                            <span class="text-xs"><?php echo date("d-m h:i A",$item->close_time);?></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>${String(data.close_type).toUpperCase()}</td>
+                      <td>${data.close_at}</td>
+                      <td class="text-end">
+                        <div class="text-${data.profit_pip > 0 ? "info text-gradient" : (data.profit_pip < 0 ? "danger text-gradient " : "secondary")} text-sm font-weight-bold">
+                        ${data.profit_pip  > 0 ? "+" : (data.profit_pip < 0 ? "" : ":")} ${data.profit_pip} pip(s) | $${data.profit_usd}
+                      </div>
+                      </td>
+                    </tr>`;
+        if($("#orderComplete tbody tr").length > 0){
+            $("#orderComplete tbody tr:first").before(html);
         }else{
-          $("#orderComplete ul").append(html);
+          $("#orderComplete tbody").append(html);
         }
-        if($("#orderComplete ul li").length > 10){
-          $("#orderComplete ul li:last").remove();
+        if($("#orderComplete tbody tr").length > 10){
+          $("#orderComplete tbody tr:last").remove();
         }
-        console.log(data);
+        $("tr.live-"+data.message_id).remove();
+        
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
         /*
@@ -332,7 +339,7 @@
                       <?php
                     }
                     foreach($data as $item){?>
-                    <tr>
+                    <tr class="live-<?php echo $item->message_id;?>">
                       <td>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
@@ -399,7 +406,7 @@
                       <?php
                     }
                     foreach($week as $item){?>
-                    <tr>
+                    <tr class="live-<?php echo $item->message_id;?>">
                       <td>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
@@ -455,23 +462,40 @@
             </div>
             <div class="card-body pt-4 p-3">
               
-              <ul class="list-group" id="orderComplete">
-
-                <?php foreach($finish as $item){ ?>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo strtoupper($item->type);?> (<?php echo strtoupper($item->close_type);?>) : <?php echo $item->close_at;?></h6>
-                      <span class="text-xs"><?php echo date("d-m h:i A",$item->opentime);?> - <?php echo date("d-m h:i A",$item->close_time);?></span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : ($item->profit_pip < 0 ? "danger text-gradient " : "secondary");?> text-sm font-weight-bold">
-                    <?php echo $item->profit_pip > 0 ? "+" : ($item->profit_pip < 0 ? "" : ":");?> <?php echo $item->profit_pip;?> pip(s) | $<?php echo $item->profit_usd;?>
-                  </div>
-                </li>
-                <?php } ?>
-              </ul>
+              <table class="table align-items-center mb-0" id="orderComplete">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Symbol</th>
+                      <th class="text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Close</th>
+                      
+                      <th class="text-secondary opacity-7">Profit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach($finish as $item){ ?>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                          <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo strtoupper($item->type);?></h6>
+                            <span class="text-xs"><?php echo date("d-m h:i A",$item->close_time);?></span>
+                          </div>
+                        </div>
+                      </td>
+                      <td><?php echo strtoupper($item->close_type);?></td>
+                      <td><?php echo $item->close_at;?></td>
+                      <td class="text-end">
+                        <div class="text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : ($item->profit_pip < 0 ? "danger text-gradient " : "secondary");?> text-sm font-weight-bold">
+                        <?php echo $item->profit_pip > 0 ? "+" : ($item->profit_pip < 0 ? "" : ":");?> <?php echo $item->profit_pip;?> pip(s) | $<?php echo $item->profit_usd;?>
+                      </div>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+              </table>
+              
               
             </div>
           </div>
