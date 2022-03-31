@@ -110,8 +110,8 @@
             color = "text-danger";
             prefix = "";
           }
-          $(".price-"+data[i].id+" h6").html('<p class="'+color+'">'+prefix+data[i].usd+"$</p>");
-          $(".price-"+data[i].id+" span").html('<b class="'+color+'">'+prefix+data[i].pips+" pip</b>")
+          $(".price-"+data[i].id+" h6").html('<i class="'+color+'">'+prefix+data[i].usd+"$</i>");
+          $(".price-"+data[i].id+" span").html('<i class="'+color+'">'+prefix+data[i].pips+" pip</i>")
         }
         
     });
