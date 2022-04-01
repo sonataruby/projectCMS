@@ -65,7 +65,7 @@ class TraderModel extends Model
 		$date = explode(" ",$obj["time"]);
 		list($year,$month,$day) = explode(".", $date[0]);
 		$obj["opentime"] = $month."-".$day."-".$year." ".$date[1];
-
+		unset($arv["time"]);
 		$this->db->table('trader_signal')->insert($obj);
 	}
 
