@@ -116,7 +116,7 @@ class TraderModel extends Model
 
 	public function updateReport($arv){
 		$info = $this->db->table('trader_report')->where(["id" => 1])->get(1)->getResult()[0];
-
+		
 		$arvUpdate = [];
 		$arvUpdate["usd_total"] = $info->usd_total + $arv["profit_usd"];
 		if($arv["close_type"] == "sl" && $arv["profit_pip"] < 0){
@@ -131,7 +131,7 @@ class TraderModel extends Model
 				$arvUpdate["tp_total_vip_pips"] = $info->tp_total_vip_pips + $arv["profit_pip"];
 			}
 		}
-
+		
 		$this->db->table('trader_report')->where(["id" => 1])->update($arvUpdate);
 		$reinfo = $this->getReport();
 		$arv["sl_total"] = $reinfo->sl_total;

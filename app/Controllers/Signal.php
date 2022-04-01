@@ -75,22 +75,24 @@ class Signal extends BaseController
 				"ordertype" => $data->ordertype
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
+
 			$client = \Config\Services::curlrequest();
 			@$client->request('post', 'http://localhost:7000/finish', ["json" => (Array)$arvObj]);
 			$msg = "";
 			
 			$readObj = (Object)$arvObj;
+
 			$reply_telegram_postid = $readObj->message_id;
 
 			if(strtolower($data->type) == "tp" && ($data->target == 3 || $data->finish == "yes")){
 				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
-				$msg .= $this->getMsgTelegramFinish($data->telegram);//Get masg Complete
+				$msg .= $this->getMsgTelegramFinish($readObj->message_id);//Get masg Complete
 			}else if(strtolower($data->type) == "sl"){
 				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
-				$msg .= $this->getMsgTelegramFinish($data->telegram);//Get masg Complete
+				$msg .= $this->getMsgTelegramFinish($readObj->message_id);//Get masg Complete
 			}else if(strtolower($data->type) == "close" && $data->finish == "yes"){
 				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
-				$msg .= $this->getMsgTelegramFinish($data->telegram);
+				$msg .= $this->getMsgTelegramFinish($readObj->message_id);
 			}
 			
 			$this->telegram($reply_telegram_postid,$msg);
@@ -98,14 +100,7 @@ class Signal extends BaseController
 			echo json_encode(["status" => "ok"]);
 		}
 
-		if($type == "updatemsgid"){
-			$arv = [
-				"message_id" => $data->telegram,
-				"message_id_group" => $data->reply_id
-			];
-			
-			if($data->reply_id > 0) $this->query->updateMsgIDOrder((Object)$arv);
-		}
+		
 
 		if($type == "status"){
 			$extract = explode(";", $this->request->getGet('query'));
@@ -144,21 +139,23 @@ class Signal extends BaseController
 
 	public function getMsgTelegramFinish($msg_id){
 		$query = $this->query->getSignalFinishByKey($msg_id);
+		
 		$msg = "";
 		$profit_pip = 0;
 		$profit_usd = 0;
 		$order = 0;
+		$msg .= "Type | Open     | Close   | Profit\n";
 		foreach ($query as $key => $value) {
-			$msg .= strtoupper($value->type)." ".$value->open." ".$value->profit_pip."\n";
+			$msg .= strtoupper($value->type)." | ".$value->open." | ".$value->close_at." | ".$value->profit_pip."\n";
 			$order +=1;
 			$profit_pip = $profit_pip + $value->profit_pip;
 			$profit_usd = $profit_usd + $value->profit_usd;
 		}
-		$msg .= "===============================\n";
+		$msg .= "==================================\n";
 		$msg .= "Order Open : ".$order."\n";
 		$msg .= "Profit Pips : ".$profit_pip." pip(s)\n";
 		$msg .= "Profit USD : ".$profit_usd." USD\n";
-		$msg .= "===============================\n";
+		$msg .= "==================================\n";
 		$msg .=  "AI System trader #BTC, #ETH, #Crypto, #Forex, #Sock\n";
 		$msg .=  "Check real signal free : https://expressiq.co/signal";
 		return $msg;
