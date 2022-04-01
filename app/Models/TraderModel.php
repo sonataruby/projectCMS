@@ -110,7 +110,7 @@ class TraderModel extends Model
 		if($info) $this->db->table('trader_signal_finish')->insert($report_arv);
 		
 		$arv["message_id_group"] = $info->message_id_group;
-		return $this->updateReport($arv);
+		return $this->updateReport($report_arv);
 		//return $arv;
 	}
 
