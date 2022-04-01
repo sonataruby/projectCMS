@@ -95,13 +95,13 @@ class TraderModel extends Model
 				"opentime" => $info->opentime,
 				"sl" => $info->sl,
 				"close_at" => $obj->close,
-				"close_time" => date("Y-m-d h:i:s"),
+				"close_time" => date("Y-m-d h:i:s",now()),
 				"profit_pip" => $obj->pip,
 				"profit_usd" => $obj->usd,
 				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "close"),
 				"message_id" => $info->message_id,
 				"is_access" => $obj->target < 2 ? "Free" : "Vip",
-				"daily" => $formatday,
+				"daily" => date("Y-m-d",now()),
 				"weekly" => (int)date('W')
 			];
 		$report_arv = $arv;
