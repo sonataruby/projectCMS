@@ -61,6 +61,8 @@ class Signal extends BaseController
 
 
 		if($type == "finish"){
+			$data->finish = $data->ordertype == "prime" ? "no" : $data->finish;
+			
 			$arv = [
 				"target" => $data->target,
 				"pip" => $data->pip,
@@ -69,7 +71,8 @@ class Signal extends BaseController
 				"usd" => $data->usd,
 				"message_id" => $data->telegram,
 				"finish" => $data->finish,
-				"time" => $data->time
+				"time" => $data->time,
+				"ordertype" => $data->ordertype
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
 			$client = \Config\Services::curlrequest();

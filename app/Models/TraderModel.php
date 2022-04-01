@@ -81,7 +81,7 @@ class TraderModel extends Model
 
 		
 		$action = $obj->close_type;
-		if($action == "sl" || $obj->target == 3 || $obj->finish == "yes"){
+		if($action == "sl" || ($obj->target == 3 && $obj->ordertype != "prime") || $obj->finish == "yes"){
 			$this->db->table('trader_signal')->delete(["message_id" => $obj->message_id]);//Remove Complete Order
 		}
 		$date = explode(" ",$obj->time);
@@ -106,6 +106,7 @@ class TraderModel extends Model
 			];
 		$report_arv = $arv;
 		if($obj->target == 4 || $obj->target == 5) $report_arv["close_type"] = "DCA";
+		if($obj->ordertype == "prime") $report_arv["close_type"] = "PRIME";
 		if($info) $this->db->table('trader_signal_finish')->insert($report_arv);
 		
 		$arv["message_id_group"] = $info->message_id_group;
