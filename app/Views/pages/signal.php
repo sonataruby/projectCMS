@@ -168,7 +168,7 @@
                   <div class="card-body position-relative z-index-1 p-4">
                     <i class="fas fa-wifi text-white p-2"></i> Server connect
                     <h5 class="text-white mt-2 mb-2 pb-2">Smart AI. System trading pro all symbol</h5>
-                    <p>Trading time 1-14h GMT +2 | <?php echo date('m-d-Y h:i A',now());?></p>
+                    <p>Trading time 1-14h GMT +2 | <?php echo date('m-d-Y H:i A');?></p>
                     <div class="d-flex">
                       <div class="d-flex">
                         <div class="me-4">
