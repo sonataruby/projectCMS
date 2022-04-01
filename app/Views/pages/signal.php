@@ -343,6 +343,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                             <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+
                             <div class="d-flex flex-column">
                               <h6 class="mb-1 text-sm text-<?php echo $item->type == "buy" ? "info" : "danger";?>"><?php echo $item->symbol;?> [<?php echo strtoupper($item->type);?>]</h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>
@@ -409,7 +410,8 @@
                     <tr class="live-<?php echo $item->message_id;?>">
                       <td>
                         <div class="d-flex align-items-center">
-                            <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                          <div class="mb-0 me-3 d-flex align-items-center justify-content-center"><?php echo fxImage($item->symbol);?></div>
+                            
                             <div class="d-flex flex-column">
                               <h6 class="mb-1 text-sm text-<?php echo $item->type == "buy" ? "info" : "danger";?>"><?php echo $item->symbol;?> [<?php echo strtoupper($item->type);?>]</h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>

@@ -215,3 +215,4 @@ class Signal extends BaseController
 	    curl_close($ch);
 	}
 }
+
