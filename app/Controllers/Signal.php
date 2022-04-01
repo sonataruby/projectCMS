@@ -48,7 +48,7 @@ class Signal extends BaseController
 				"message_id_group" => $data->relymsg,
 				"timefream" => $data->tf, 
 				"chart" => "",
-				"time" => $data->time,
+				"opentime" => $data->time,
 				"ordertype" => $data->ordertype
 			];
 

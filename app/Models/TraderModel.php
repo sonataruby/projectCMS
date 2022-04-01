@@ -62,10 +62,10 @@ class TraderModel extends Model
 
 	public function createOrder($obj){
 		//print_r($obj);
-		$date = explode(" ",$obj["time"]);
+		$date = explode(" ",$obj["opentime"]);
 		list($year,$month,$day) = explode(".", $date[0]);
 		$obj["opentime"] = $month."-".$day."-".$year." ".$date[1];
-		unset($arv["time"]);
+		//unset($arv["time"]);
 		$this->db->table('trader_signal')->insert($obj);
 	}
 
