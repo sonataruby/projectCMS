@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://develop.com:8080/';
+    public $baseURL = 'https://expressiq.co/';
     public $socketio = "http://localhost:3000";
 
     /**
@@ -110,7 +110,7 @@ class App extends BaseConfig
      * @var string
      */
     //public $appTimezone = 'America/Chicago';
-    public $appTimezone = 'Etc/GMT+3';
+    public $appTimezone = 'Etc/GMT+1';
     
     /**
      * --------------------------------------------------------------------------
