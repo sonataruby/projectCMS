@@ -209,8 +209,7 @@ class TraderModel extends Model
 			
 			$self->update(["message_id" => $key],["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 		}
-		print_r($arv);
-		exit();
+		
 		$query = $this->orderBy("id","DESC")->findAll(100);
 		foreach ($query as $key => $value) {
 			if(!in_array($value->message_id,$arvk)){
