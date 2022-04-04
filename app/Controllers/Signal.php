@@ -52,7 +52,7 @@ class Signal extends BaseController
 				"opentime" => $data->time,
 				"ordertype" => $data->ordertype
 			];
-
+			
 			$this->query->createOrder($arv);
 			$client = \Config\Services::curlrequest();
 
@@ -226,6 +226,12 @@ class Signal extends BaseController
 		$post = new PostsModel;
 		$data = $post->getPostsByType("indicator");
 		return view("pages/shop",$data);
+	}
+
+	public function shopinfo($id){
+		$post = new PostsModel;
+		$data = $post->getPostByID($id);
+		return view("pages/shop-detail",["data" => $data]);
 	}
 }
 

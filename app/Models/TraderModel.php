@@ -13,7 +13,7 @@ class TraderModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['auth_id', 'offer_id','ip','brower','useragent','version','platform','country','state','zip','permissions','status'];
+    protected $allowedFields = ['symbol', 'groupSymbol','timefream','type','open','open_2','open_3','opentime','sl','tp','tp_2','tp_3','tp_hit','chart','message_id','message_id_group'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -80,6 +80,7 @@ class TraderModel extends Model
 	}
 
 	public function createOrder($obj){
+
 		//print_r($obj);
 		//$date = explode(" ",$obj["opentime"]);
 		//list($year,$month,$day) = explode(".", $date[0]);
@@ -193,7 +194,7 @@ class TraderModel extends Model
 		return $reinfo;
 	}
 
-	
+
 	public  function updateMsgIDOrder($obj)
 	{
 		$this->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);

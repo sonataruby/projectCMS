@@ -12,7 +12,7 @@ class TraderFinishModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['auth_id', 'offer_id','ip','brower','useragent','version','platform','country','state','zip','permissions','status'];
+    protected $allowedFields = ['signals_id', 'type','symbol','open','opentime','sl','close_at','close_time','profit_pip','profit_usd','close_type','message_id','is_access','daily','weekly'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

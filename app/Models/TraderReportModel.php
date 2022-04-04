@@ -12,7 +12,7 @@ class TraderReportModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['auth_id', 'offer_id','ip','brower','useragent','version','platform','country','state','zip','permissions','status'];
+    protected $allowedFields = ['sl_total', 'sl_total_pips','tp_total','tp_total_pips','tp_total_vip_pips','usd_total','stock_symbol','forex_symbol','crypto_symbol'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
