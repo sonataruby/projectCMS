@@ -203,10 +203,11 @@ class TraderModel extends Model
 	public function updateMsgIDOrderStatus($arv){
 		
 		$arvk = [];
-		
+		$self = new TraderModel;
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
-			$this->where(["message_id" => $key])->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+
+			$self->where(["message_id" => $key])->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 		}
 		
 		$query = $this->orderBy("id","DESC")->findAll(100);

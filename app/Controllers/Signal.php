@@ -52,7 +52,7 @@ class Signal extends BaseController
 				"opentime" => $data->time,
 				"ordertype" => $data->ordertype
 			];
-			
+
 			$this->query->createOrder($arv);
 			$client = \Config\Services::curlrequest();
 
@@ -118,6 +118,7 @@ class Signal extends BaseController
 					$arv[$key_id]["pips"] = $pips;
 				}
 			}
+			
 			if($arv) $this->query->updateMsgIDOrderStatus($arv);
 			
 
