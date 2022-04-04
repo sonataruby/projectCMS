@@ -204,7 +204,7 @@ class TraderModel extends Model
 		
 		$arvk = [];
 		$self = new TraderModel;
-		$self2 = new TraderModel;
+		
 		$db = db_connect();
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
@@ -217,13 +217,14 @@ class TraderModel extends Model
 			
 		}
 		
-		$self3 = new TraderModel;
-		$self4 = new TraderModel;
-		$query = $self3->orderBy("id","DESC")->findAll(100);
+		//$self3 = new TraderModel;
+		
+		$query = $this->orderBy("id","DESC")->findAll(100);
 		foreach ($query as $key => $value) {
 			if(!in_array($value->message_id,$arvk)){
 				//echo $value->message_id.".<br>";
-				$self4->delete(["message_id" => $value->message_id]);
+				//$self4->delete(["message_id" => $value->message_id]);
+				$db->query("DELETE FROM `trader_signal` WHERE message_id='".$value->message_id."'");
 			}
 		}
 
