@@ -76,28 +76,28 @@ class Signal extends BaseController
 				"ordertype" => $data->ordertype
 			];
 			$arvObj = $this->query->finishOrder((Object)$arv);
+			if($arvObj){
+				$client = \Config\Services::curlrequest();
+				@$client->request('post', 'http://localhost:7000/finish', ["json" => (Array)$arvObj]);
+				$msg = "";
+				
+				$readObj = (Object)$arvObj;
 
-			$client = \Config\Services::curlrequest();
-			@$client->request('post', 'http://localhost:7000/finish', ["json" => (Array)$arvObj]);
-			$msg = "";
-			
-			$readObj = (Object)$arvObj;
+				$reply_telegram_postid = $readObj->message_id;
 
-			$reply_telegram_postid = $readObj->message_id;
-
-			if(strtolower($data->type) == "tp" && ($data->target == 3 || $data->finish == "yes")){
-				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
-				$msg .= $this->getMsgTelegramFinish($readObj->message_id);//Get masg Complete
-			}else if(strtolower($data->type) == "sl"){
-				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
-				$msg .= $this->getMsgTelegramFinish($readObj->message_id);//Get masg Complete
-			}else if(strtolower($data->type) == "close" && $data->finish == "yes"){
-				$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
-				$msg .= $this->getMsgTelegramFinish($readObj->message_id);
+				if(strtolower($data->type) == "tp" && ($data->target == 3 || $data->finish == "yes")){
+					$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
+					$msg .= $this->getMsgTelegramFinish($readObj->message_id);//Get masg Complete
+				}else if(strtolower($data->type) == "sl"){
+					$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
+					$msg .= $this->getMsgTelegramFinish($readObj->message_id);//Get masg Complete
+				}else if(strtolower($data->type) == "close" && $data->finish == "yes"){
+					$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
+					$msg .= $this->getMsgTelegramFinish($readObj->message_id);
+				}
+				
+				$this->telegram($reply_telegram_postid,$msg);
 			}
-			
-			$this->telegram($reply_telegram_postid,$msg);
-
 			echo json_encode(["status" => "ok"]);
 		}
 
@@ -118,7 +118,7 @@ class Signal extends BaseController
 					$arv[$key_id]["pips"] = $pips;
 				}
 			}
-			
+
 			if($arv) $this->query->updateMsgIDOrderStatus($arv);
 			
 
