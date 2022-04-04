@@ -205,13 +205,15 @@ class TraderModel extends Model
 		$arvk = [];
 		$self = new TraderModel;
 		$self2 = new TraderModel;
+		$db = db_connect();
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
 			$self->where(["message_id" => $key]);
 			$dataRow = $self->first();
-			$arvUpdate = ["status_pips" => $value["pips"],"status_usd" => $value["usd"]];
-			print_r($arvUpdate);
-			$self2->where("id",$dataRow->id)->update($arvUpdate);
+			
+			$db->query("UPDATE `trader_signal` SET status_pips='".$value["pips"]."', status_usd='".$value["usd"]."' WHERE id='".$dataRow->id."'");
+			//print_r($arvUpdate);
+			//$self2->where("id",$dataRow->id)->update($arvUpdate);
 			
 		}
 		
