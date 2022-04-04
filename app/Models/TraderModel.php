@@ -208,12 +208,12 @@ class TraderModel extends Model
 			$arvk[] = $key;
 			$self->where(["message_id" => $key]);
 			$dataRow = $self->first();
-			print_r($dataRow->id);
-			$this->update($dataRow->id,["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+			
+			$self->save(["id" => $dataRow->id,"status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 			
 		}
 		
-		print_r($arvk);
+		
 		$query = $this->orderBy("id","DESC")->findAll(100);
 		foreach ($query as $key => $value) {
 			if(!in_array($value->message_id,$arvk)){
