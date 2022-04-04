@@ -13,7 +13,7 @@ class TraderModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['symbol', 'groupSymbol','timefream','type','open','open_2','open_3','opentime','sl','tp','tp_2','tp_3','tp_hit','chart','message_id','message_id_group'];
+    protected $allowedFields = ['symbol', 'groupSymbol','status_pips','status_usd','timefream','type','open','open_2','open_3','opentime','sl','tp','tp_2','tp_3','tp_hit','chart','message_id','message_id_group'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
