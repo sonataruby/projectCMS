@@ -22,7 +22,7 @@ class TraderModel extends Model
 
     protected $validationRules    = [];
     protected $validationMessages = [];
-    protected $skipValidation     = false;
+    protected $skipValidation     = true;
 
 	public function getSignal($s=""){
 		
