@@ -33,8 +33,13 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->resource('api', ['controller' => 'Api', 'only' => ['index', 'show', 'create', 'update', 'delete']]);
-$routes->get('admin/users', 'UserController::index', ['filter' => 'permission:manage-user']);
-$routes->get('admin/users', 'UserController::index', ['filter' => 'role:admin,superadmin']);
+$routes->group("admin",['namespace' => 'App\Controllers\Admin'],
+    function ($routes) {
+            $routes->get('/', 'Admin\Home::index');
+    },['filter' => 'role:admin,superadmin']);
+
+//$routes->get('admin/users', 'UserController::index', ['filter' => 'permission:manage-user']);
+//$routes->get('admin/users', 'UserController::index', ['filter' => 'role:admin,superadmin']);
 //$routes->get('/assets/(:any)','Views/assets/$1');
 /*
  * --------------------------------------------------------------------

@@ -20,7 +20,7 @@ class Signal extends BaseController
         $dataWeek = $this->query->getSignalWeek($search);
         $finish = $this->query->getSignalFinish();
         $report = $this->query->getReport();
-		return view('pages/signal',["data" => $data, "week" => $dataWeek,"report" => $report, "finish" => $finish, "header" => ["title" => "Smart Signal"]]);
+		return view('pages/signal',["data" => $data, "week" => $dataWeek,"report" => $report, "finish" => $finish, "header" => $this->getHeader(["title" => "Smart Signal"])]);
 	}
 
 	public function attemptProfile(){

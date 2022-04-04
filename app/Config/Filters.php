@@ -71,5 +71,6 @@ class Filters extends BaseConfig
      */
     public $filters = [
         'login' => ['before' => ['account/*','admin/*']],
+        'permission' => ['before' => ['admin/*']]
     ];
 }

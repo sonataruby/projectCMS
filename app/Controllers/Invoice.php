@@ -7,6 +7,10 @@ class Invoice extends BaseController
 
     public function index()
     {
-        return view('pages/chat');
+        return view('pages/invoice');
+    }
+
+    public function create(){
+        
     }
 }

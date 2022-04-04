@@ -1,62 +1,81 @@
 <?php namespace App\Models;
 
 use CodeIgniter\Model;
-
+use App\Models\TraderFinishModel;
+use App\Models\TraderReportModel;
 
 class TraderModel extends Model
 {
 	protected $table = 'trader_signal';
     protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
+
+    protected $returnType     = 'object';
+    protected $useSoftDeletes = false;
+
+    protected $allowedFields = ['auth_id', 'offer_id','ip','brower','useragent','version','platform','country','state','zip','permissions','status'];
+
+    protected $useTimestamps = false;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
+
+    protected $validationRules    = [];
+    protected $validationMessages = [];
+    protected $skipValidation     = false;
+
 	public function getSignal($s=""){
-		$query = $this->db->table('trader_signal');
-		if($s != ""){
-			$query->like("symbol",$s);
-		}
-		$query->whereIn("timefream",["M1","M5"]);
 		
-		$query->orderBy("id","DESC");
-		$query = $query->get(10);
-		return $query->getResult();
+		if($s != ""){
+			$this->like("symbol",$s);
+		}
+		$this->whereIn("timefream",["M1","M5"]);
+		
+		$this->orderBy("id","DESC");
+		
+		return $this->findAll(10);
 
 	}
 
 	public function getSignalAll($s=""){
 		$query = $this->db->table('trader_signal');
 		if($s != ""){
-			$query->like("symbol",$s);
+			$this->like("symbol",$s);
 		}
 		
-		$query->orderBy("id","DESC");
-		$query = $query->get(100);
-		return $query->getResult();
+		$this->orderBy("id","DESC");
+		
+		return $this->findAll(100);
 
 	}
 
 
 	public function getSignalWeek($s=""){
-		$query = $this->db->table('trader_signal');
+		
 		if($s != ""){
-			$query->like("symbol",$s);
+			$this->like("symbol",$s);
 		}
 		
-		$query->whereIn("timefream",["M15","M30","H1","H4","D1"]);
-		$query->orderBy("id","DESC");
-		$query = $query->get(10);
-		return $query->getResult();
+		$this->whereIn("timefream",["M15","M30","H1","H4","D1"]);
+		$this->orderBy("id","DESC");
+		
+		return $this->findAll(10);
 
 	}
 
 
 	public function getSignalFinish(){
-		$query = $this->db->table('trader_signal_finish')->orderBy("id","DESC")->get(10);
-		return $query->getResult();
+		$finish = new TraderFinishModel;
+
+		$query = $finish->orderBy("id","DESC")->findAll(10);
+		return $query;
 
 	}
 	public function getSignalFinishByKey($message_id=0){
 		if($message_id == 0) return [];
-
-		$query = $this->db->table('trader_signal_finish')->where("message_id",$message_id)->orderBy("id","DESC")->get();
-		return $query->getResult();
+		$finish = new TraderFinishModel;
+		$query = $finish->where("message_id",$message_id)->orderBy("id","DESC")->first();
+		return $query;
 
 	}
 
@@ -66,7 +85,7 @@ class TraderModel extends Model
 		//list($year,$month,$day) = explode(".", $date[0]);
 		$obj["opentime"] = date('Y-m-d h:i:s',now());
 		//unset($arv["time"]);
-		$this->db->table('trader_signal')->insert($obj);
+		$this->insert($obj);
 	}
 
 	public function test(){
@@ -75,14 +94,16 @@ class TraderModel extends Model
 	}
 
 	public function finishOrder($obj){
-		$info = $this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->get(1)->getResult()[0];
+
+		$finish = new TraderFinishModel;
+		$info = $this->where(["message_id" => $obj->message_id])->first();
 		
 		if(!$info) return false;
 
 		
 		$action = $obj->close_type;
 		if($action == "sl" || ($obj->target == 3 && $obj->ordertype != "prime") || $obj->finish == "yes"){
-			$this->db->table('trader_signal')->delete(["message_id" => $obj->message_id]);//Remove Complete Order
+			$this->delete(["message_id" => $obj->message_id]);//Remove Complete Order
 		}
 		$date = explode(" ",$obj->time);
 		list($year,$month,$day) = explode(".", $date[0]);
@@ -107,7 +128,7 @@ class TraderModel extends Model
 		$report_arv = $arv;
 		if($obj->target == 4 || $obj->target == 5) $report_arv["close_type"] = "DCA";
 		if($obj->ordertype == "prime") $report_arv["close_type"] = "PRIME";
-		if($info) $this->db->table('trader_signal_finish')->insert($report_arv);
+		if($info) $finish->insert($report_arv);
 		
 		$arv["message_id_group"] = $info->message_id_group;
 		return $this->updateReport($arv);
@@ -115,7 +136,8 @@ class TraderModel extends Model
 	}
 
 	public function updateReport($arv){
-		$info = $this->db->table('trader_report')->where(["id" => 1])->get(1)->getResult()[0];
+		$report = new TraderReportModel;
+		$info = $report->find(1);
 		
 		$arvUpdate = [];
 		$arvUpdate["usd_total"] = $info->usd_total + $arv["profit_usd"];
@@ -132,7 +154,8 @@ class TraderModel extends Model
 			}
 		}
 		
-		$this->db->table('trader_report')->where(["id" => 1])->update($arvUpdate);
+		$report->update(1,$arvUpdate);
+
 		$reinfo = $this->getReport();
 		$arv["sl_total"] = $reinfo->sl_total;
 		$arv["sl_total_pips"] = $reinfo->sl_total_pips;
@@ -145,8 +168,10 @@ class TraderModel extends Model
 	}
 
 	public function getReport(){
-		$reinfo = $this->db->table('trader_report')->where(["id" => 1])->get(1)->getResult();
-		$reportdayly = $this->db->table('trader_signal_finish')->where(['daily' => date('Y-m-d') ])->get()->getResult();
+		$report = new TraderReportModel;
+		$finish = new TraderFinishModel;
+		$reinfo = $report->find(1);
+		$reportdayly = $finish->where(['daily' => date('Y-m-d', now()) ])->findAll();
 		$num_sig = 0;
 		$win = 0;
 		$loss = 0;
@@ -164,12 +189,12 @@ class TraderModel extends Model
 			"numsig" => $num_sig,
 			"usd" => $usd
 		];
-		$reinfo[0]->daily = (Object)$daily;
-		return $reinfo[0];
+		$reinfo->daily = (Object)$daily;
+		return $reinfo;
 	}
 	public  function updateMsgIDOrder($obj)
 	{
-		$this->db->table('trader_signal')->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);
+		$this->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);
 	}
 
 	public function updateMsgIDOrderStatus($arv){
@@ -178,14 +203,14 @@ class TraderModel extends Model
 		
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
-			$this->db->table('trader_signal')->where(["message_id" => $key])->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+			$this->where(["message_id" => $key])->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 		}
 		
-		$query = $this->db->table('trader_signal')->orderBy("id","DESC")->get(100)->getResult();
+		$query = $this->orderBy("id","DESC")->findAll(100);
 		foreach ($query as $key => $value) {
 			if(!in_array($value->message_id,$arvk)){
 				//echo $value->message_id.".<br>";
-				$this->db->table('trader_signal')->delete(["message_id" => $value->message_id]);
+				$this->delete(["message_id" => $value->message_id]);
 			}
 		}
 

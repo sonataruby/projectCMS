@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
-class Admin extends BaseController
+class Home extends AdminController
 {
     public function index()
     {
