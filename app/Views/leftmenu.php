@@ -143,13 +143,19 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="/signal">
+                <a class="nav-link " href="/signal/calender">
                   Calender
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="/signal">
+                <a class="nav-link " href="/signal/download">
                   Download
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link " href="/signal/shop">
+                  Shop
                 </a>
               </li>
 

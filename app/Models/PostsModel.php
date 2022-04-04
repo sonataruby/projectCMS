@@ -13,7 +13,7 @@ class PostsModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['url', 'name','description','contents','images','auth_id','tags','category_id','permissions','status','language'];
+    protected $allowedFields = ['url', 'type', 'name','description','contents','images','auth_id','tags','category_id','permissions','status','language'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -33,6 +33,30 @@ class PostsModel extends Model
     public function getPost($page, $number, $search=""){
         $this->where("language",$this->language);
         return $this->findAll($page, $number);
+    }
+
+    public function getPostsByType($type,$page=0, $number=20,$search=''){
+        $this->where("language",$this->language);
+        $this->where("type",$type);
+        return $this->findAll($page,$number);
+    }
+
+    public function getPostByID($id){
+        $this->where("language",$this->language);
+        $this->where("id",$id);
+        return $this->first();
+    }
+
+    public function getPostByURL($url){
+        $this->where("language",$this->language);
+        $this->where("url",$url);
+        return $this->first();
+    }
+
+    public function getPostByAuth($auth_id,$page=0, $number=20,$search=''){
+        //$this->where("language",$this->language);
+        $this->where("auth_id",$auth_id);
+        return $this->findAll($page,$number);
     }
 
     public function createPosts($arv=[]){

@@ -74,7 +74,7 @@ class TraderModel extends Model
 	public function getSignalFinishByKey($message_id=0){
 		if($message_id == 0) return [];
 		$finish = new TraderFinishModel;
-		$query = $finish->where("message_id",$message_id)->orderBy("id","DESC")->first();
+		$query = $finish->where("message_id",$message_id)->orderBy("id","DESC")->findAll();
 		return $query;
 
 	}
@@ -192,6 +192,8 @@ class TraderModel extends Model
 		$reinfo->daily = (Object)$daily;
 		return $reinfo;
 	}
+
+	
 	public  function updateMsgIDOrder($obj)
 	{
 		$this->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);

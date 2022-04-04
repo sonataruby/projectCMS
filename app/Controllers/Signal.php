@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\TraderModel;
+use App\Models\PostsModel;
 class Signal extends BaseController
 {
 	private $query;
@@ -139,7 +140,7 @@ class Signal extends BaseController
 
 	public function getMsgTelegramFinish($msg_id){
 		$query = $this->query->getSignalFinishByKey($msg_id);
-		
+		if(!$query) return false;
 		$msg = "";
 		$profit_pip = 0;
 		$profit_usd = 0;
@@ -214,6 +215,17 @@ class Signal extends BaseController
 	    //print_r($result);
 	    //  close connection
 	    curl_close($ch);
+	}
+
+
+	/*
+	Shopping
+	*/
+
+	public function shop(){
+		$post = new PostsModel;
+		$data = $post->getPostsByType("indicator");
+		return view("pages/shop",$data);
 	}
 }
 
