@@ -206,8 +206,8 @@ class TraderModel extends Model
 		$self = new TraderModel;
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
-			$self->where(["message_id" => $key]);
-			$self->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+			
+			$self->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]],["message_id" => $key]);
 		}
 		
 		print_r($arvk);
