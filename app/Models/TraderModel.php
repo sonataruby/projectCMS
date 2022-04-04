@@ -210,16 +210,17 @@ class TraderModel extends Model
 			$self->where(["message_id" => $key]);
 			$dataRow = $self->first();
 			
-			$self2->update(["status_pips" => $value["pips"],"status_usd" => $value["usd"]],$dataRow->id);
+			$self2->update($dataRow->id,["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 			
 		}
 		
-		print_r($arvk);
-		$query = $this->orderBy("id","DESC")->findAll(100);
+		$self3 = new TraderModel;
+		$self4 = new TraderModel;
+		$query = $self3->orderBy("id","DESC")->findAll(100);
 		foreach ($query as $key => $value) {
 			if(!in_array($value->message_id,$arvk)){
 				//echo $value->message_id.".<br>";
-				$this->delete(["message_id" => $value->message_id]);
+				$self4->delete(["message_id" => $value->message_id]);
 			}
 		}
 
