@@ -209,8 +209,9 @@ class TraderModel extends Model
 			$arvk[] = $key;
 			$self->where(["message_id" => $key]);
 			$dataRow = $self->first();
-			
-			$self2->update($dataRow->id,["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+			$arvUpdate = ["status_pips" => $value["pips"],"status_usd" => $value["usd"]];
+			print_r($arvUpdate);
+			$self2->update($dataRow->id,$arvUpdate);
 			
 		}
 		
