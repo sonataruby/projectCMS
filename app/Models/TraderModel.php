@@ -207,14 +207,14 @@ class TraderModel extends Model
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
 			
-			$self->update(["message_id" => $key],["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
+			$this->table("trader_signal")->update(["message_id" => $key],["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 		}
 		
 		$query = $this->orderBy("id","DESC")->findAll(100);
 		foreach ($query as $key => $value) {
 			if(!in_array($value->message_id,$arvk)){
 				//echo $value->message_id.".<br>";
-				$this->delete(["message_id" => $value->message_id]);
+				$this->table("trader_signal")->delete(["message_id" => $value->message_id]);
 			}
 		}
 
