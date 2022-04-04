@@ -211,7 +211,7 @@ class TraderModel extends Model
 			$dataRow = $self->first();
 			$arvUpdate = ["status_pips" => $value["pips"],"status_usd" => $value["usd"]];
 			print_r($arvUpdate);
-			$self2->where("id",$dataRow->id)->update($arvUpdate);
+			$self2->update($dataRow->id,$arvUpdate);
 			
 		}
 		
