@@ -208,7 +208,7 @@ class TraderModel extends Model
 			$arvk[] = $key;
 			$self->where(["message_id" => $key]);
 			$dataRow = $self->first();
-			
+			print_r($dataRow->id);
 			$this->update($dataRow->id,["status_pips" => $value["pips"],"status_usd" => $value["usd"]]);
 			
 		}
