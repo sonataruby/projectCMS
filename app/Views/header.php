@@ -45,6 +45,7 @@
   <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="/assets/css/dashboard.css?v=2.0.2" rel="stylesheet" />
+  <link id="pagestyle" href="/assets/css/style.css?v=2.0.2" rel="stylesheet" />
   <script src="/assets/js/jquery.js?v=2.0.2"></script>
   <script src="/assets/js/core/popper.min.js"></script>
   <script src="/assets/js/core/bootstrap.min.js"></script>

@@ -1,0 +1,41 @@
+#paymentTabs.nav-pills{
+	background: none;
+	border-radius: 0;
+}
+#paymentTabs li{
+	
+}
+#paymentTabs li div.paypal{
+	background-size: 205px;
+	background-position: 48px -163px;
+	
+}
+#paymentTabs li div.credit{
+	
+	background-position: 48px -155px;
+	background-size: 152px;
+	
+}
+#paymentTabs li div.crypto{
+	background-size: 205px;
+	background-position: 48px -273px !important;
+	
+}
+
+#paymentTabs li div{
+	background-image: url(../img/payment/payment.webp);
+	
+	
+  	background-repeat: no-repeat;
+
+	height: 56px;
+	min-width: 250px;
+	padding: 20px 12px;
+	box-shadow: inset 0 0 0 1.2px #e1e1e1;
+	cursor: pointer;
+	border-radius: 3px;
+
+}
+#paymentTabs li:hover div{
+	box-shadow: inset 0 0 0 1.2px --bs-primary;
+}
