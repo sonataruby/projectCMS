@@ -8,7 +8,8 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
-
+use App\Models\InvoiceModel;
+use App\Models\PostsModel;
 /**
  * Class BaseController
  *
@@ -36,7 +37,9 @@ class BaseController extends Controller
      * @var array
      */
     protected $helpers = ["auth","date"];
-
+    protected $invoice;
+    protected $posts;
+    protected $pages;
     /**
      * Constructor.
      */
@@ -44,6 +47,8 @@ class BaseController extends Controller
     {
         // Do Not Edit This Line
         $request->config = json_decode(file_get_contents(FCPATH."/config.json"));
+        $this->invoice = new InvoiceModel;
+        $this->posts = new PostsModel;
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.

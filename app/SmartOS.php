@@ -43,6 +43,12 @@ if (! function_exists('fxImage'))
 	function fxImage($symbol=""){
 		$img1 = substr($symbol, 0, 3);
 		$img2 = substr($symbol, 3, 6);
-		return '<img src="/assets/img/fx/'.$img1.'.jpg" style="height:20px;margin-right:5px;"> <img src="/assets/img/fx/'.$img2.'.jpg" style="height:20px;">';
+		
+		if(strlen($symbol) == 6){
+			return '<img src="/assets/img/fx/'.$img1.'.jpg" style="height:20px;margin-right:5px;"> <img src="/assets/img/fx/'.$img2.'.jpg" style="height:20px;">';
+		}else{
+			return '<img src="/assets/img/fx/'.$symbol.'.svg" style="height:20px;margin-right:5px;">';
+		}
+		
 	}
 }

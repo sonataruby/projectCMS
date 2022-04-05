@@ -27,8 +27,41 @@ class Signal extends BaseController
 	public function attemptProfile(){
 
 	}
-	public function test(){
-		//$this->scanTelegramID(1804);
+	public function updateaccount(){
+		$time = $this->request->getPost("timeline");
+        if($time == "") $time = 1;
+        $price = 120;
+        $total = $time * $price;
+        $discordLine = 5;
+        if($time == 3){
+            $discordLine = 20;
+        }else if($time == 6){
+            $discordLine = 30;
+        }else if($time == 12){
+            $discordLine = 40;
+        }else if($time == 24){
+            $discordLine = 50;
+        }
+        $discord = $total - $total*(100-$discordLine)/100;
+        $pay = $total - $discord;
+        $item = [
+            "name" => $time . " month",
+            "price" => $price,
+            "discord" => $discord,
+            "payment" => $pay,
+            "qty" => 1
+        ];
+
+		$arv = [
+			"name" => "Update VIP",
+			"cost" => $total,
+			"discord" => $discord,
+			"discordline" => $discordLine,
+			"payment" => $pay
+		];
+		$invoice_id = $this->invoice->createInvoice($arv, [$item]);
+
+		return _go("/payment/invoice/".$invoice_id);
 	}
 	public function api($type=""){
 		$data  = json_decode($this->request->getGet('query'));

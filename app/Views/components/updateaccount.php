@@ -7,7 +7,7 @@
 <div class="modal fade" id="updateAccount" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <form method="post" action="/payment">
+      <form method="post" action="/signal/updateaccount">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Update VIP Account</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

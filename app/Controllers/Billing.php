@@ -9,4 +9,8 @@ class Billing extends BaseController
     {
         return view('pages/billing');
     }
+
+    public function create(){
+        
+    }
 }
