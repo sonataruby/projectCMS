@@ -8,6 +8,7 @@ class Payment extends BaseController
     public function index()
     {
         $time = $this->request->getPost("timeline");
+        if($time == "") $time = 1;
         $price = 120;
         $total = $time * $price;
         $discordLine = 5;
