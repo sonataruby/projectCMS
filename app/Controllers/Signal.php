@@ -291,7 +291,7 @@ class Signal extends BaseController
 			"discordline" => $discordLine,
 			"payment" => $pay,
 			"return_action" => "downloadcontent",
-			"contents" => json_encode(["filename" => $meta_id.".key","content" => $this->serial($meta_id, $time * 30)]);
+			"contents" => json_encode(["filename" => $meta_id.".key","content" => $this->serial($meta_id, $time * 30)])
 		];
 		$invoice_id = $this->invoice->createInvoice($arv, [$item]);
 
