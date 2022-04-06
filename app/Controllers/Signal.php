@@ -302,7 +302,7 @@ class Signal extends BaseController
 		//$post = new PostsModel;
 		//$data = $this->posts->getPostsByType("indicator");
 
-		return view("pages/shop_smartos");
+		return view("pages/shop_smartos",["header" => ["title" => "Smart OS Shop"]]);
 	}
 
 	public function buysmartindicator(){
@@ -342,7 +342,7 @@ class Signal extends BaseController
 		//$post = new PostsModel;
 		//$data = $this->posts->getPostsByType("indicator");
 
-		return view("pages/shop_indicator");
+		return view("pages/shop_indicator",["header" => ["title" => "Smart OS Indicator"]]);
 	}
 
 	public function serial($id=0,$finish=30){
@@ -365,13 +365,13 @@ class Signal extends BaseController
 		//$post = new PostsModel;
 		$data = $this->posts->getPostsByType("indicator");
 
-		return view("pages/shop",["item" => $data]);
+		return view("pages/shop",["item" => $data, "header" => ["title" => "Smart OS Shop"]]);
 	}
 
 	public function shopinfo($id){
 		
 		$data = $this->posts->getPostByID($id);
-		return view("pages/shop-detail",["data" => $data]);
+		return view("pages/shop-detail",["data" => $data,"header" => ["title" => "Smart OS Shop"]]);
 	}
 
 
