@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\TraderModel;
 use App\Models\PostsModel;
+use App\Libraries\UUID;
 class Signal extends BaseController
 {
 	private $query;
@@ -24,13 +25,12 @@ class Signal extends BaseController
 		return view('pages/signal',["data" => $data, "week" => $dataWeek,"report" => $report, "finish" => $finish, "header" => $this->getHeader(["title" => "Smart Signal"])]);
 	}
 
-	public function attemptProfile(){
+	
 
-	}
 	public function updateaccount(){
 		$time = $this->request->getPost("timeline");
         if($time == "") $time = 1;
-        $price = 120;
+        $price = 30;
         $total = $time * $price;
         $discordLine = 5;
         if($time == 3){
@@ -257,16 +257,90 @@ class Signal extends BaseController
 	Shopping
 	*/
 
+	public function buysmartos(){
+		$time = $this->request->getPost("timeline");
+		$meta_id = $this->request->getPost("meta_id");
+
+        if($time == "") $time = 1;
+        $price = 120;
+        $total = $time * $price;
+        $discordLine = 5;
+        if($time == 3){
+            $discordLine = 20;
+        }else if($time == 6){
+            $discordLine = 30;
+        }else if($time == 12){
+            $discordLine = 40;
+        }else if($time == 24){
+            $discordLine = 50;
+        }
+        $discord = $total - $total*(100-$discordLine)/100;
+        $pay = $total - $discord;
+        $item = [
+            "name" => $time . " month",
+            "price" => $price,
+            "discord" => $discord,
+            "payment" => $pay,
+            "qty" => 1
+        ];
+
+		$arv = [
+			"name" => "Buy Smart OS | ".$meta_id,
+			"cost" => $total,
+			"discord" => $discord,
+			"discordline" => $discordLine,
+			"payment" => $pay,
+			"return_action" => "downloadcontent",
+			"contents" => json_encode(["filename" => $meta_id.".key","content" => $this->serial($meta_id, $time * 30)]);
+		];
+		$invoice_id = $this->invoice->createInvoice($arv, [$item]);
+
+		return _go("/payment/invoice/".$invoice_id);
+	}
+
+	public function shopos(){
+		//$post = new PostsModel;
+		//$data = $this->posts->getPostsByType("indicator");
+
+		return view("pages/shop_smartos");
+	}
+
+	public function serial($id=0,$finish=30){
+		$data = [
+			"start" => date('Y.m.d h:i',now()),
+			"end" => date('Y.m.d h:i',now()+(84000*$finish)),
+			"meta_id" => $id,
+			"serial" => UUID::v5('1546058f-5a25-4334-85ae-e68f2a44bbaf', $id)
+		];
+		$json = json_encode($data);
+		return base64_encode($json);
+	}
+
+	public function serialindicator($id=0){
+		
+		print_r(base64_encode("SmartIQIndicator").base64_encode($id."|".UUID::v5('1546058f-5a25-4334-85ae-e68f2a44bbaf', $id)));
+	}
+
 	public function shop(){
-		$post = new PostsModel;
-		$data = $post->getPostsByType("indicator");
-		return view("pages/shop",$data);
+		//$post = new PostsModel;
+		$data = $this->posts->getPostsByType("indicator");
+
+		return view("pages/shop",["item" => $data]);
 	}
 
 	public function shopinfo($id){
-		$post = new PostsModel;
-		$data = $post->getPostByID($id);
+		
+		$data = $this->posts->getPostByID($id);
 		return view("pages/shop-detail",["data" => $data]);
 	}
+
+
+
+
+
+
+
+
+
 }
 

@@ -47,10 +47,20 @@ class Payment extends BaseController
                 $billing->create($data);
 
                 $class = $data->return_action;
-                if($class != ""){
-                    $ob = new $class;
-                    return $ob->payment();
+                if($class == "downloadcontent"){
+                    $data = json_decode($data->contents);
+                    $name = $data->filename;
+                    return $this->response->download($name, $data->content);
+                }else if($class == "download"){
+
+                }else{
+                    if($class != ""){
+                        $ob = new $class;
+                        return $ob->payment();
+                    }
                 }
+
+                
                 return _go("/signal");
             }
         }

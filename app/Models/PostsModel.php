@@ -77,4 +77,7 @@ class PostsModel extends Model
 
         $this->delete($id);
     }
+
+
+    
 }

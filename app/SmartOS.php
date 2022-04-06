@@ -37,6 +37,13 @@ if (! function_exists('_go'))
 	}
 }
 
+if(!function_exists("posts_options")){
+	function posts_options($posts_id){
+		$db = db_connect();
+        $data = $db->query("SELECT * FROM posts_options WHERE posts_id='".$posts_id."'")->getResult();
+        return $data;
+	}
+}
 
 if (! function_exists('fxImage'))
 {
