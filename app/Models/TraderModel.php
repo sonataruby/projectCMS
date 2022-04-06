@@ -96,16 +96,17 @@ class TraderModel extends Model
 	}
 
 	public function finishOrder($obj){
-
+		$db = db_connect();
 		$finish = new TraderFinishModel;
 		$info = $this->where(["message_id" => $obj->message_id])->first();
 		
 		if(!$info) return false;
 
 		
-		$action = $obj->close_type;
+		$action = strtolower($obj->close_type);
 		if($action == "sl" || ($obj->target == 3 && $obj->ordertype != "prime") || $obj->finish == "yes"){
-			$this->delete(["message_id" => $obj->message_id]);//Remove Complete Order
+			$db->query("DELETE FROM trader_signal WHERE message_id='".$obj->message_id."'");
+			//$this->delete(["message_id" => $obj->message_id]);//Remove Complete Order
 		}
 		$date = explode(" ",$obj->time);
 		list($year,$month,$day) = explode(".", $date[0]);
@@ -121,7 +122,7 @@ class TraderModel extends Model
 				"close_time" => date("Y-m-d h:i:s",now()),
 				"profit_pip" => $obj->pip,
 				"profit_usd" => $obj->usd,
-				"close_type" => ($obj->close_type == "sl" || $obj->close_type == "tp" ?  $obj->close_type : "close"),
+				"close_type" => ($action == "sl" || $action == "tp" ?  strtoupper($action) : "Close"),
 				"message_id" => $info->message_id,
 				"is_access" => $obj->target < 2 ? "Free" : "Vip",
 				"daily" => date("Y-m-d",now()),
