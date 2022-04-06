@@ -284,59 +284,17 @@
         <div class="col-lg-7 mt-4">
             <div class="noteSignal"></div>
           
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-6">
-                <div class="card card-body mb-3">
-                  <div class="d-flex justify-content-between">
-                      <div>Order  <h6 class="mb-0"><?php echo ($report->daily->numsig);?></h6></div>
-                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                  </div>
-                  
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6">
-                <div class="card card-body mb-3">
-                  <div class="d-flex justify-content-between">
-                      <div>Win  <h6 class="mb-0"><?php echo ($report->daily->win);?> <span class="text-xs">pips</span></h6></div>
-                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6">
-                <div class="card card-body mb-3">
-                  <div class="d-flex justify-content-between">
-                      <div>Loss  <h6 class="mb-0"><?php echo ($report->daily->loss);?> <span class="text-xs">pips</span></h6></div>
-                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-6">
-                <div class="card card-body mb-3">
-                  <div class="d-flex justify-content-between">
-                      <div>USD  <h6 class="mb-0"><?php echo ($report->daily->usd);?> $</h6></div>
-                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           
             <div class="card mb-3">
             <div class="card-header pb-0 px-3">
               <div class="row">
                 <div class="col-6 d-flex align-items-center">
-                  <h6 class="mb-0">Real Signal Daily</h6>
+                  <h6 class="mb-0">Real Signal Daily | <?php echo date('Y-m-d h:i A');?></h6>
                 </div>
                 <div class="col-6 text-end">
                   
-                  <?php echo components("updateaccount",['text' => '<i class="fas fa-plus"></i>&nbsp;&nbsp;Update VIP', 'class' => 'btn bg-gradient-dark mb-0']);?>
+                  <?php echo components("updateaccount",['text' => '<i class="fas fa-plus"></i>&nbsp;&nbsp;Update VIP', 'class' => 'btn bg-gradient-success mb-0']);?>
                 </div>
               </div>
             </div>
@@ -394,6 +352,49 @@
             </div>
           </div>
 
+          <div class="row mb-3">
+              <div class="col-lg-3 col-md-6">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>Order  <h6 class="mb-0"><?php echo ($report->daily->numsig);?></h6></div>
+                      <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>Win  <h6 class="mb-0"><?php echo ($report->daily->win);?> <span class="text-xs">pips</span></h6></div>
+                      <div class="icon icon-shape bg-gradient-success shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>Loss  <h6 class="mb-0"><?php echo ($report->daily->loss);?> <span class="text-xs">pips</span></h6></div>
+                      <div class="icon icon-shape bg-gradient-info shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                <div class="card card-body mb-3">
+                  <div class="d-flex justify-content-between">
+                      <div>USD  <h6 class="mb-0"><?php echo ($report->daily->usd);?> $</h6></div>
+                      <div class="icon icon-shape bg-gradient-danger shadow-primary text-center rounded-circle">
+                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <div class="card">
               <div class="card-header pb-0 px-3">
                 <div class="row">
@@ -486,7 +487,7 @@
               </div>
             </div>
             <div class="card-body pt-4 p-3">
-              
+              <div class="table-responsive p-0">
               <table class="table align-items-center mb-0" id="orderComplete">
                   <thead>
                     <tr>
@@ -520,7 +521,7 @@
                     <?php } ?>
                   </tbody>
               </table>
-              
+              </div>
               
             </div>
           </div>
