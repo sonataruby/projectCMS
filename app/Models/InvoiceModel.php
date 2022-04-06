@@ -13,7 +13,7 @@ class InvoiceModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['name','firstname', 'lastname','email','phone','address','country','state','zip','cost','discord','discordline','payment','payment_method','payment_id','status','return_action'];
+    protected $allowedFields = ['name','firstname', 'lastname','email','phone','address','country','state','zip','cost','discord','discordline','payment','payment_method','payment_id','status','return_action','contents'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
