@@ -23,7 +23,7 @@
                         <?php } ?>
                         
                         <div>
-                            <a href="/signal/shopinfo/<?php echo $value->id;?>" class="btn btn-primary">Info</a>
+                            <!--<a href="#/signal/shopinfo/<?php echo $value->id;?>" class="btn btn-primary">Info</a>//-->
                             <a href="<?php echo $value->url_customs;?>" class="btn btn-primary">Buy Now</a>
                         </div>
                     </div>
