@@ -350,6 +350,7 @@
                 </table>
               </div>
             </div>
+            <div class="card-footer text-center border-top">Update vip show full order, <b>DCA 1, DCA 2, TP 1, TP 2, TP 3</b></div>
           </div>
 
           <div class="row mb-3">
@@ -407,7 +408,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body  px-0 pt-0 pb-2">
 
 
                 <div class="table-responsive p-0">
@@ -486,7 +487,7 @@
                 </div>
               </div>
             </div>
-            <div class="card-body pt-4 p-3">
+            <div class="card-body  px-0 pt-0 pb-2">
               <div class="table-responsive p-0">
               <table class="table align-items-center mb-0" id="orderComplete">
                   <thead>
