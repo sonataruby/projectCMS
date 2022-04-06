@@ -5,13 +5,12 @@ use App\Models\BillingModel;
 class Payment extends BaseController
 {
 
-    private $paypalClientID = "Aafu2Nq8NSYSWq9KeU5_Ht4Ge6YjboAWLrVlZCptGHw0s2JoclY5U9js8RyICCfCSF2lh27gqefmGteW";
-    private $paypalClientSecret = "EJs8bpM09hRXZTczxFA5mvMwVXYE3P_g-S4WcVf_PumSDIfv_A7ik7QWCFBkZHjDqjPcXc2mHC5ZzNBj";
-    /*
-    Live
+    //private $paypalClientID = "Aafu2Nq8NSYSWq9KeU5_Ht4Ge6YjboAWLrVlZCptGHw0s2JoclY5U9js8RyICCfCSF2lh27gqefmGteW";
+    //private $paypalClientSecret = "EJs8bpM09hRXZTczxFA5mvMwVXYE3P_g-S4WcVf_PumSDIfv_A7ik7QWCFBkZHjDqjPcXc2mHC5ZzNBj";
+    
     private $paypalClientID = "AZgXuZZ0zqKppoB1GgPNQ4ymTqssQMCKvgEjT1dJTeDaNtGr-qSdPiCajuS_Hu8w4TKT94LorYmrEYMG";
     private $paypalClientSecret = "EJBAS33Vv62aeQUx7Nvl6uzjHzxqUh5N8UkR1wax8odJc4FiPFaudy4kCX9LkQDs7Co0jtrOhhbUVtZw";
-    */
+    
     public function index(){
 
     }
@@ -69,8 +68,8 @@ class Payment extends BaseController
         // Step 2.1 : Between Step 2 and Step 3
         $apiContext->setConfig(
           array(
-            'mode' => 'sandbox',
-            'log.LogEnabled' => true,
+            'mode' => 'live',
+            'log.LogEnabled' => false,
             'log.FileName' => 'PayPal.log',
             'log.LogLevel' => 'FINE'
           )
@@ -149,8 +148,8 @@ class Payment extends BaseController
         // Step 2.1 : Between Step 2 and Step 3
         $apiContext->setConfig(
           array(
-            'mode' => 'sandbox',
-            'log.LogEnabled' => true,
+            'mode' => 'live',
+            'log.LogEnabled' => false,
             'log.FileName' => 'PayPal.log',
             'log.LogLevel' => 'FINE'
           )
