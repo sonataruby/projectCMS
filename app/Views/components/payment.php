@@ -21,8 +21,8 @@
 				<h6>Your Order Summary</h6>
 				<?php foreach ($item as $key => $value) { ?>
 					<div class="d-flex justify-content-between">
-						<div><?php echo $value["name"];?></div>
-						<div>$<?php echo $value["price"];?></div>
+						<div><?php echo $value->name;?></div>
+						<div>$<?php echo $value->price;?></div>
 					</div>
 				<?php } ?>
 				
@@ -32,9 +32,9 @@
 				
 				<div class="d-flex justify-content-between">
 					<div>Total</div>
-					<div class="text-success"><?php echo $total;?> $</div>
+					<div class="text-success"><?php echo $cost;?> $</div>
 				</div>
-				<?php if($discordLine && $discordLine > 0){ ?>
+				<?php if($discordline && $discordline > 0){ ?>
 				<div class="d-flex justify-content-between">
 					<div><b>Discount <?php echo $discordLine;?>%</b></div>
 					<div class="text-success">-<?php echo $discord;?> $</div>
@@ -44,7 +44,7 @@
 				
 				<div class="d-flex justify-content-between">
 					<h4>Payment</h4>
-					<h4 class="text-success"><?php echo $pay;?> $</h4>
+					<h4 class="text-success"><?php echo $payment;?> $</h4>
 				</div>
 
 				<?php if(!logged_in()){?>
@@ -55,18 +55,19 @@
 				<?php } ?>
 
 
+				<form method="post">
 				<div class="">
 
 					<ul class="nav nav-pills" id="paymentTabs" role="tablist">
 					  <li class="nav-item" role="presentation" id="paypal-tab" data-bs-toggle="tab" data-bs-target="#paypal" type="button" role="tab" aria-controls="paypal" aria-selected="true">
-					    <label><div class="paypal"><input type="radio" name="method"></div></label>
+					    <label><div class="paypal"><input type="radio" name="methodpayment" value="paypal"></div></label>
 					  </li>
 
 					  <li class="nav-item" role="presentation" id="credit-tab" data-bs-toggle="tab" data-bs-target="#credit" type="button" role="tab" aria-controls="credit" aria-selected="false">
-					    <label><div class="credit"><input type="radio" name="method"></div></label>
+					    <label><div class="credit"><input type="radio" name="methodpayment" value="credit"></div></label>
 					  </li>
 					  <li class="nav-item" role="presentation" id="crypto-tab" data-bs-toggle="tab" data-bs-target="#crypto" type="button" role="tab" aria-controls="crypto" aria-selected="false">
-					    <label><div class="crypto"><input type="radio" name="method"></div></label>
+					    <label><div class="crypto"><input type="radio" name="methodpayment" value="crypto"></div></label>
 					  </li>
 					  
 					</ul>
@@ -74,7 +75,7 @@
 				
 				<div class="tab-content">
 				  <div class="tab-pane active" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
-				  		<button class="btn btn-lg btn-primary">Pay with Paypal</button>
+				  		<button class="btn btn-lg btn-primary" type="submit">Pay with Paypal</button>
 
 				  </div>
 				  <div class="tab-pane" id="credit" role="tabpanel" aria-labelledby="credit-tab">
@@ -85,6 +86,7 @@
 				  </div>
 				  
 				</div>
+				</form>
 				By submitting this form you agree to our Terms of service and Privacy Policy.
 
 			</div>

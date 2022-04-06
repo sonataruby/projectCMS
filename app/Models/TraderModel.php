@@ -30,7 +30,7 @@ class TraderModel extends Model
 			$this->like("symbol",$s);
 		}
 		$this->whereIn("timefream",["M1","M5"]);
-		
+		$this->groupBy("message_id");
 		$this->orderBy("id","DESC");
 		
 		return $this->findAll(10);
@@ -42,7 +42,7 @@ class TraderModel extends Model
 		if($s != ""){
 			$this->like("symbol",$s);
 		}
-		
+		$this->groupBy("message_id");
 		$this->orderBy("id","DESC");
 		
 		return $this->findAll(100);
@@ -57,6 +57,7 @@ class TraderModel extends Model
 		}
 		
 		$this->whereIn("timefream",["M15","M30","H1","H4","D1"]);
+		$this->groupBy("message_id");
 		$this->orderBy("id","DESC");
 		
 		return $this->findAll(10);
@@ -66,7 +67,7 @@ class TraderModel extends Model
 
 	public function getSignalFinish(){
 		$finish = new TraderFinishModel;
-
+		
 		$query = $finish->orderBy("id","DESC")->findAll(10);
 		return $query;
 

@@ -25,7 +25,7 @@ class InvoiceItemModel extends Model
     protected $skipValidation     = false;
 
 
-    public function createItem($inc_id=0, $arv=[]){
+    public function createItem($inc_id=0, $arv=[]){ 
         if($inc_id == 0 || !is_array($arv)) return false;
         foreach ($arv as $key => $value) {
             if(is_array($value)){
@@ -38,7 +38,8 @@ class InvoiceItemModel extends Model
 
 
     public function getItemInvoice($inc_id){
-        $this->where("inc_id",$inc_id);
+
+        $this->where(["inc_id" => $inc_id]);
         return $this->findAll();
     }
 
@@ -47,4 +48,8 @@ class InvoiceItemModel extends Model
         $this->where("inc_id",$inc_id);
         $this->delete();
     }
+
+
+
+    
 }

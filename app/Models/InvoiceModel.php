@@ -13,7 +13,7 @@ class InvoiceModel extends Model
     protected $returnType     = 'object';
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['name','firstname', 'lastname','email','cost','discord','discordline','payment','status','return_action'];
+    protected $allowedFields = ['name','firstname', 'lastname','email','phone','address','country','state','zip','cost','discord','discordline','payment','payment_method','payment_id','status','return_action'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
@@ -41,7 +41,7 @@ class InvoiceModel extends Model
     public function getInvoice($inc_id){
         $data = $this->where("inc_id",$inc_id)->first();
         $dbitem = new InvoiceItemModel;
-        $data->item = $dbitem->getItemInvoice($invoice_id);
+        $data->item = $dbitem->getItemInvoice($inc_id);
         return $data;
     }
     
@@ -54,5 +54,16 @@ class InvoiceModel extends Model
         $dbitem = new InvoiceItemModel;
         $dbitem->clearItemInvoice($inc_id);
         return $this->where("auth_id",user_id())->delete($inc_id);
+    }
+
+    public function updatepayment($inc_id, $arv=""){
+        $db = db_connect();
+        $db->query("UPDATE invoice SET payment_method='".$arv["payment_method"]."', payment_id='".$arv["payment_id"]."' WHERE inc_id='".$inc_id."'");
+        
+    }
+
+    public function updateComplete($inc_id){
+        $db = db_connect();
+        $db->query("UPDATE invoice SET status='Complete' WHERE inc_id='".$inc_id."'");
     }
 }

@@ -57,7 +57,8 @@ class Signal extends BaseController
 			"cost" => $total,
 			"discord" => $discord,
 			"discordline" => $discordLine,
-			"payment" => $pay
+			"payment" => $pay,
+			"return_action" => "\App\Models\Account\setPremisstion('vip')"
 		];
 		$invoice_id = $this->invoice->createInvoice($arv, [$item]);
 

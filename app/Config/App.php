@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'https://expressiq.co/';
+    public $baseURL = 'http://develop.com:8080/';
     public $socketio = "http://localhost:3000";
 
     /**

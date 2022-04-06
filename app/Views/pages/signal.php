@@ -149,6 +149,17 @@
         },600000);
     })();
 
+
+     (function(){
+        setInterval(function(){
+            var getTime = $(".closetime");
+            getTime.each((item) => {
+                var finishTime. = item.text();
+                alert(finishTime);
+            });
+         
+        },6000);
+    })();
     
 
     </script>
@@ -482,7 +493,7 @@
                           <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
                           <div class="d-flex flex-column">
                             <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo strtoupper($item->type);?></h6>
-                            <span class="text-xs"><?php echo date("d-m h:i A",$item->close_time);?></span>
+                            <span class="text-xs closetime"><?php echo date("d-m h:i A",$item->close_time);?></span>
                           </div>
                         </div>
                       </td>
