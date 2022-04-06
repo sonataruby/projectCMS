@@ -154,8 +154,8 @@
         setInterval(function(){
             var getTime = $(".closetime");
             getTime.each((item) => {
-                var finishTime. = item.text();
-                alert(finishTime);
+                var finishTime = $(item).text();
+                //alert(finishTime);
             });
          
         },6000);
