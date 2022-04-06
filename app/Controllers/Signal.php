@@ -305,6 +305,46 @@ class Signal extends BaseController
 		return view("pages/shop_smartos");
 	}
 
+	public function buysmartindicator(){
+		
+		$meta_id = $this->request->getPost("meta_id");
+
+       
+        $price = 50;
+        $total = $price;
+        $discordLine = 5;
+        
+        $discord = $total - $total*(100-$discordLine)/100;
+        $pay = $total - $discord;
+        $item = [
+            "name" => "Smart Indicator ".$meta_id,
+            "price" => $price,
+            "discord" => $discord,
+            "payment" => $pay,
+            "qty" => 1
+        ];
+
+		$arv = [
+			"name" => "Buy Smart Indicator | ".$meta_id,
+			"cost" => $total,
+			"discord" => $discord,
+			"discordline" => $discordLine,
+			"payment" => $pay,
+			"return_action" => "downloadcontent",
+			"contents" => json_encode(["filename" => $meta_id.".key","content" => $this->serialindicator($meta_id)])
+		];
+		$invoice_id = $this->invoice->createInvoice($arv, [$item]);
+
+		return _go("/payment/invoice/".$invoice_id);
+	}
+
+	public function shopindicator(){
+		//$post = new PostsModel;
+		//$data = $this->posts->getPostsByType("indicator");
+
+		return view("pages/shop_indicator");
+	}
+
 	public function serial($id=0,$finish=30){
 		$data = [
 			"start" => date('Y.m.d h:i',now()),
@@ -318,7 +358,7 @@ class Signal extends BaseController
 
 	public function serialindicator($id=0){
 		
-		print_r(base64_encode("SmartIQIndicator").base64_encode($id."|".UUID::v5('1546058f-5a25-4334-85ae-e68f2a44bbaf', $id)));
+		return base64_encode("SmartIQIndicator").base64_encode($id."|".UUID::v5('1546058f-5a25-4334-85ae-e68f2a44bbaf', $id));
 	}
 
 	public function shop(){

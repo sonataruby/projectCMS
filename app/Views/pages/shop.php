@@ -14,8 +14,8 @@
                     <?php foreach ($item as $key => $value) { ?>
                         
                     <div class="col-md-4">
-                        <img src="<?php echo $value->images;?>" style="width: 100%;">
-                        <h6><?php echo $value->name;?></h6>
+                        <img src="<?php echo $value->images;?>" style="width: 100%; max-height: 250px; border-radius: 5px;">
+                        <h6 class="mt-4"><?php echo $value->name;?></h6>
                         <p><?php echo $value->description;?></p>
                         <hr>
                         <?php foreach (posts_options($value->id) as $k => $v) { ?>

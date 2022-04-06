@@ -13,7 +13,7 @@
 
             	<div class="row">
                 <div class="col-xl-5 col-lg-6 text-center">
-                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="/assets/img/fx/AI-Robots.jpeg" alt="chair">
+                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="/assets/img/fx/smartindicator.jpg" alt="chair">
                   
                   <!-- Root element of PhotoSwipe. Must have class pswp. -->
                   <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -55,7 +55,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                 </div>
                 <div class="col-lg-5 mx-auto">
-                  <h3 class="mt-lg-0 mt-4">Smart OS</h3>
+                  <h3 class="mt-lg-0 mt-4">Smart Indicator</h3>
                   <div class="rating">
                     <i class="fas fa-star" aria-hidden="true"></i>
                     <i class="fas fa-star" aria-hidden="true"></i>
@@ -65,7 +65,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                   <br>
                   <h6 class="mb-0 mt-3">Price</h6>
-                  <h5>$120/Month</h5>
+                  <h5>$50/Account</h5>
                   <span class="badge badge-success">In Stock</span>
                   <br>
                   <label class="mt-4">Description</label>
@@ -75,7 +75,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     <li>Working all timefream</li>
                     <li>Easy Sutup</li>
                   </ul>
-                  <form action="/signal/buysmartos" method="post">
+                  <form action="/signal/buysmartindicator" method="post">
                     <div class="row mt-4">
                       <div class="col-lg-12">
                         MT4 ID
@@ -83,16 +83,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                       </div>
                     </div>
                   <div class="row mt-4">
-                    <div class="col-lg-5">
-                      <select class="form-select" name="timeline">
-                        <option selected value="1">Select Time</option>
-                        <option value="1">1 Month</option>
-                        <option value="2">3 Month</option>
-                        <option value="3">6 Month</option>
-                        <option value="12">12 Month</option>
-                        <option value="24">24 Month</option>
-                      </select>
-                    </div>
+                    
                     <div class="col-lg-5">
                       <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="submit" name="button">Buy Now</button>
                     </div>

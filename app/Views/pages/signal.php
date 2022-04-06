@@ -60,6 +60,11 @@
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
 
+        var alert = `<div class="alert alert-warning" role="alert">${data.symbol} new signal</div>`;
+        $(".noteSignal").html(alert);
+        setTimeout(function(){
+            $(".noteSignal").html("");
+        }, 5000);
         Push.create(data.symbol + ' Signal', {
           body: data.type + ' '+data.symbol + ' '+data.open,
           timeout: 4000,
@@ -105,6 +110,13 @@
         
         const audio = new Audio("/assets/sound/qcodes_3.mp3" );
         audio.play();
+
+        var alert = `<div class="alert alert-warning" role="alert">${data.symbol} close</div>`;
+        $(".noteSignal").html(alert);
+        setTimeout(function(){
+            $(".noteSignal").html("");
+        }, 5000);
+
         /*
         Push.create(data.symbol + ' Signal', {
           body: 'Close '+data.symbol + ' '+data.type+' at '+data.close_at,
@@ -270,7 +282,7 @@
       </div>
       <div class="row">
         <div class="col-lg-7 mt-4">
-          
+            <div class="noteSignal"></div>
           
             <div class="row mb-3">
               <div class="col-lg-3 col-md-6">
