@@ -134,7 +134,7 @@ class Signal extends BaseController
 					$msg .= $this->getMsgTelegramFinish($readObj->message_id);
 				}else{
 					if(strtolower($data->type) == "tp"){
-						$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] hit TP ".$data->target."\n";
+						$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] hit TP ".($data->target > 3 ? "DCA" : $data->target)."\n";
 						$msg .= "Open : ".$readObj->open . "  Close :  ".$data->close_at."\n";
 						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$readObj->profit_pip." pip(s)\n";
 					}
