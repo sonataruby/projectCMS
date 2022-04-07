@@ -136,12 +136,12 @@ class Signal extends BaseController
 					if(strtolower($data->type) == "tp"){
 						$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] hit TP ".$data->target."\n";
 						$msg .= "Open : ".$readObj->open . "  Close :  ".$data->close_at."\n";
-						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$data->profit_pip." pip(s)\n";
+						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$readObj->profit_pip." pip(s)\n";
 					}
 					if(strtolower($data->type) == "sl"){
 						$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] hit SL\n";
-						$msg .= "Open : ".$readObj->open . "  Close :  ".$data->close_at."\n";
-						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$data->profit_pip." pip(s)\n";
+						$msg .= "Open : ".$readObj->open . "  Close :  ".$readObj->close_at."\n";
+						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$readObj->profit_pip." pip(s)\n";
 					}
 				}
 				
