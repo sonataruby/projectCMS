@@ -132,6 +132,17 @@ class Signal extends BaseController
 				}else if(strtolower($data->type) == "close" && $data->finish == "yes"){
 					$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] Complete round\n";
 					$msg .= $this->getMsgTelegramFinish($readObj->message_id);
+				}else{
+					if(strtolower($data->type) == "tp"){
+						$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] hit TP ".$data->target."\n";
+						$msg .= "Open : ".$readObj->open . "  Close :  ".$data->close_at."\n";
+						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$data->profit_pip." pip(s)\n";
+					}
+					if(strtolower($data->type) == "sl"){
+						$msg = $readObj->symbol . " [".strtoupper($readObj->type)."] hit SL\n";
+						$msg .= "Open : ".$readObj->open . "  Close :  ".$data->close_at."\n";
+						$msg .= "Profit : ".$readObj->profit_usd . "$  Pips :  ".$data->profit_pip." pip(s)\n";
+					}
 				}
 				
 				$this->telegram($reply_telegram_postid,$msg);
@@ -233,8 +244,8 @@ class Signal extends BaseController
 	    $data = array(
 	            'chat_id' => $group,
 	            'text' => $msg,
-	            'disable_web_page_preview' => false,
-	            'reply_to_message_id' => $reply_to_message_id
+	            'disable_web_page_preview' => false
+	            //'reply_to_message_id' => $reply_to_message_id
 	        );
 
 	    $url = "https://api.telegram.org/bot".$token."/sendMessage";
