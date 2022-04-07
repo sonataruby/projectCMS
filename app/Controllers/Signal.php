@@ -142,7 +142,7 @@ class Signal extends BaseController
 
 			$arv = [];
 			foreach ($extract as $key => $value) {
-				list($key_id,$usd, $pips) = explode("|", $value);
+				list($key_id,$usd, $pips, $symbol) = explode("|", $value);
 				
 				if($arv[$key_id] > 0){
 					$arv[$key_id]["usd"] = $arv[$key_id]["usd"] + $usd;
@@ -153,7 +153,7 @@ class Signal extends BaseController
 				}
 			}
 
-			if($arv) $this->query->updateMsgIDOrderStatus($arv);
+			if($arv) $this->query->updateMsgIDOrderStatus($arv,$symbol);
 			
 
 			$query = $this->query->getSignal();

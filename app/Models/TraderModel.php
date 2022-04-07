@@ -202,7 +202,7 @@ class TraderModel extends Model
 		$this->where(["message_id" => $obj->message_id])->update(["message_id_group" => $obj->message_id_group]);
 	}
 
-	public function updateMsgIDOrderStatus($arv){
+	public function updateMsgIDOrderStatus($arv, $symbol=""){
 		
 		$arvk = [];
 		$self = new TraderModel;
@@ -210,7 +210,7 @@ class TraderModel extends Model
 		$db = db_connect();
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
-			$self->where(["message_id" => $key]);
+			$self->where(["message_id" => $key, "symbol" => $symbol]);
 			$dataRow = $self->first();
 			
 			$db->query("UPDATE `trader_signal` SET status_pips='".$value["pips"]."', status_usd='".$value["usd"]."' WHERE id='".$dataRow->id."'");
