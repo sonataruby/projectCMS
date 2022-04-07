@@ -83,14 +83,14 @@
         var html = `<tr>
                       <td>
                         <div class="d-flex align-items-center">
-                          <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"} mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-${data.type == "buy" ? "up" : "down"}"></i></button>
+                          <button class="btn btn-icon-only btn-rounded btn-outline-${data.type == "buy" ? "info" : "danger"} mb-0 me-3 btn-sm d-flex align-items-center justify-content-center">${String(data.close_type).toUpperCase()}</button>
                           <div class="d-flex flex-column">
                             <h6 class="mb-1 text-dark text-sm">${data.symbol} [${String(data.type).toUpperCase()}]</h6>
                             <span class="text-xs"><?php echo date("d-m h:i A",$item->close_time);?></span>
                           </div>
                         </div>
                       </td>
-                      <td>${String(data.close_type).toUpperCase()}</td>
+                      <td>${data.open}</td>
                       <td>${data.close_at}</td>
                       <td class="text-end">
                         <div class="text-${data.profit_pip > 0 ? "info text-gradient" : (data.profit_pip < 0 ? "danger text-gradient " : "secondary")} text-sm font-weight-bold">
