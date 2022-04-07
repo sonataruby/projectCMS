@@ -210,7 +210,7 @@ class TraderModel extends Model
 		$db = db_connect();
 		foreach ($arv as $key => $value) {
 			$arvk[] = $key;
-			$self->where(["message_id" => $key, "symbol" => $symbol]);
+			$self->where(["message_id" => $key]);
 			$dataRow = $self->first();
 			
 			$db->query("UPDATE `trader_signal` SET status_pips='".$value["pips"]."', status_usd='".$value["usd"]."' WHERE id='".$dataRow->id."'");
