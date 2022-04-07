@@ -59,17 +59,17 @@
 				<div class="">
 
 					<ul class="nav nav-pills" id="paymentTabs" role="tablist">
-					  <li class="nav-item" role="presentation" id="paypal-tab" data-bs-toggle="tab" data-bs-target="#paypal" type="button" role="tab" aria-controls="paypal" aria-selected="true">
-					    <label><div class="paypal"><input type="radio" name="methodpayment" value="paypal"></div></label>
+					  <li class="nav-item active" role="presentation" id="paypal-tab" data-bs-toggle="tab" data-bs-target="#paypal" type="button" role="tab" aria-controls="paypal" aria-selected="true">
+					    <label><div class="paypal"><input type="radio" name="methodpayment" value="paypal" checked></div></label>
 					  </li>
-
+					  <!--
 					  <li class="nav-item" role="presentation" id="credit-tab" data-bs-toggle="tab" data-bs-target="#credit" type="button" role="tab" aria-controls="credit" aria-selected="false">
 					    <label><div class="credit"><input type="radio" name="methodpayment" value="credit"></div></label>
 					  </li>
 					  <li class="nav-item" role="presentation" id="crypto-tab" data-bs-toggle="tab" data-bs-target="#crypto" type="button" role="tab" aria-controls="crypto" aria-selected="false">
 					    <label><div class="crypto"><input type="radio" name="methodpayment" value="crypto"></div></label>
 					  </li>
-					  
+					  //-->
 					</ul>
 				</div>
 				

@@ -28,6 +28,10 @@ class Signal extends BaseController
 	
 
 	public function updateaccount(){
+		if (!logged_in())
+		{
+			return redirect()->route('login');
+		}
 		$time = $this->request->getPost("timeline");
         if($time == "") $time = 1;
         $price = 30;

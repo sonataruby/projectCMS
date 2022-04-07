@@ -48,11 +48,15 @@ class Payment extends BaseController
 
                 $class = $data->return_action;
                 if($class == "downloadcontent"){
-                    $data = json_decode($data->contents);
+                    $dataContent = json_decode($data->contents);
                     $name = $data->filename;
-                    return $this->response->download($name, $data->content);
+                    return $this->response->download($name, $dataContent->content);
                 }else if($class == "download"){
 
+                }else if($class == "updateaccount"){
+                    $db = db_connect();
+                    $auth_id = $data->auth_id;
+                    $db->query("INSERT INTO auth_users_permissions SET user_id='".$auth_id."', permission_id='2' ");
                 }else{
                     if($class != ""){
                         $ob = new $class;
