@@ -323,10 +323,10 @@
                     <tr class="live-<?php echo $item->message_id;?>">
                       <td>
                         <div class="d-flex align-items-center">
-                            <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                            <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><?php echo $item->timefream;?></button>
 
                             <div class="d-flex flex-column">
-                              <h6 class="mb-1 text-sm text-<?php echo $item->type == "buy" ? "info" : "danger";?>"><?php echo $item->symbol;?> [<?php echo strtoupper($item->type." ".$item->timefream);?>]</h6>
+                              <h6 class="mb-1 text-sm text-<?php echo $item->type == "buy" ? "info" : "danger";?>"><?php echo $item->symbol;?> [<?php echo strtoupper($item->type);?>]</h6>
                               <span class="text-xs"><?php echo $item->opentime;?></span>
                             </div>
                           </div>
@@ -504,14 +504,14 @@
                     <tr>
                       <td>
                         <div class="d-flex align-items-center">
-                          <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-<?php echo $item->type == "buy" ? "up" : "down";?>"></i></button>
+                          <button class="btn btn-icon-only btn-rounded btn-outline-<?php echo $item->type == "buy" ? "info" : "danger";?> mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><?php echo substr($item->close_type,0,2);?></button>
                           <div class="d-flex flex-column">
                             <h6 class="mb-1 text-dark text-sm"><?php echo $item->symbol;?> <?php echo strtoupper($item->type);?></h6>
                             <span class="text-xs closetime"><?php echo date("d-m h:i A",$item->close_time);?></span>
                           </div>
                         </div>
                       </td>
-                      <td><?php echo strtoupper($item->close_type);?></td>
+                      <td><?php echo strtoupper($item->open);?></td>
                       <td><?php echo $item->close_at;?></td>
                       <td class="text-end">
                         <div class="text-<?php echo $item->profit_pip > 0 ? "info text-gradient " : ($item->profit_pip < 0 ? "danger text-gradient " : "secondary");?> text-sm font-weight-bold">
